@@ -69,3 +69,23 @@ export type FavoriteAction = {
   type: string;
   payload: CityWeatherResponse;
 };
+
+export type Note = {
+  text: string;
+  createdAt: string;
+  coord: string;
+};
+
+export type CityNotes = {
+  [coord: string]: Note[];
+};
+
+export type NoteAction = {
+  type: string;
+  payload: Note | DeleteNotePayload;
+};
+
+export type DeleteNotePayload = {
+  notes: Note[];
+  coord: string;
+};
