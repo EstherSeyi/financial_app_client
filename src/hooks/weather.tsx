@@ -11,19 +11,22 @@ import {
 import { getFavorites } from "../helpers/favorites";
 
 export const queryKeys = {
-  cityWeather: (cityName: string) => [cityName, "weather_details"],
+  cityWeather: (cityCoord: string) => [cityCoord, "weather_details"],
   citiesWeatherDetails: () => ["cities_weather_details"],
 };
 
-export function useGetCityWeather(cityName: string) {
+export function useGetCityWeather(cityCoord: string) {
   return useQuery(
-    queryKeys.cityWeather(cityName),
-    () =>
-      weatherRequest.get("/current", {
+    queryKeys.cityWeather(cityCoord),
+    async () => {
+      const cityWeatherDet = await weatherRequest.get("/current", {
         params: {
-          query: cityName,
+          query: cityCoord,
         },
-      }),
+      });
+      cityWeatherDet.data.coordinates = `${cityWeatherDet?.data?.location?.lat},${cityWeatherDet?.data?.location?.lon}`;
+      return cityWeatherDet;
+    },
     {
       select: (response) => response.data,
       staleTime: 3600000,
@@ -74,6 +77,11 @@ export function useGetCitiesWeather(cities: City[]) {
     },
     {
       enabled: Boolean(cities?.length),
+      select: (response) => {
+        return response.sort((a: CityWeatherResponse, b: CityWeatherResponse) =>
+          a.location.name < b.location.name ? -1 : 1
+        );
+      },
       staleTime: 3600000,
     }
   ) as UseQueryResult<CityWeatherResponse[], AxiosError<WeatherAPIError>>;
