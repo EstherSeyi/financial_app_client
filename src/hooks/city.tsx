@@ -9,7 +9,7 @@ export const queryKeys = {
 };
 
 export function useGetCities() {
-  // return { data: resp.data.sort((a, b) => a.name.localeCompare(b.name)) };
+  // return { data: resp.data.sort((a, b) =>  a.name < b.name ? -1 : 1) };
   return useQuery(
     queryKeys.cities(),
     async () => {
@@ -22,7 +22,7 @@ export function useGetCities() {
     },
     {
       select: (response) =>
-        response.data.sort((a: City, b: City) => a.name.localeCompare(b.name)),
+        response.data.sort((a: City, b: City) => (a.name < b.name ? -1 : 1)),
       staleTime: 3600000,
     }
   );
