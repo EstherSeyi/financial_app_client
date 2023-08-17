@@ -5,10 +5,12 @@ import { CityWeatherResponse } from "../types/index";
 
 const CityItem = ({
   city,
-  handleFavourite,
+  handleFavorite,
+  handleDeleteCity,
 }: {
   city: CityWeatherResponse;
-  handleFavourite: (city: CityWeatherResponse) => void;
+  handleFavorite: (city: CityWeatherResponse) => void;
+  handleDeleteCity: (city: CityWeatherResponse) => void;
 }) => {
   return (
     <div className="block mb-4 border-2 border-highlightBlue hover:bg-transparent focus:bg-transparent transition-all py-4 px-6 rounded-2xl bg-[#202b3b]">
@@ -28,21 +30,24 @@ const CityItem = ({
           <div className="flex flex-col justify-between">
             <div>
               <Link
-                to={`/${city.coordinates.toLocaleLowerCase()}`}
+                to={`/${city.location.name.toLocaleLowerCase()}`}
                 className="font-semibold text-3xl text-[#dde0e4ff] mb-1 hover:underline"
               >
                 {city.location.name}
               </Link>
               <p>10:23</p>
             </div>
-            <button className="text-sm self-start">
+            <button
+              className="text-sm self-start"
+              onClick={() => handleDeleteCity(city)}
+            >
               <TrashIcon className="w-5 h-5" />
             </button>
           </div>
           <div className="flex flex-col justify-between">
             <button
               className={`self-end ${city.favourite ? "text-yellow-300" : ""}`}
-              onClick={() => handleFavourite(city)}
+              onClick={() => handleFavorite(city)}
             >
               <StarIcon className="w-8 h-8" />
             </button>
