@@ -7,7 +7,7 @@ export const getFavorites = () => {
 
 const sortFavorites = (favorites: CityWeatherResponse[]) => {
   return favorites.sort((a: CityWeatherResponse, b: CityWeatherResponse) =>
-    a.location.name.localeCompare(b.location.name)
+    a.location.name < b.location.name ? -1 : 1
   );
 };
 
@@ -15,15 +15,17 @@ export const isAFavorite = (
   favorites: CityWeatherResponse[],
   city: CityWeatherResponse
 ) => {
-  return favorites.findIndex((item) => item.coordinates === city.coordinates);
+  return (
+    favorites.findIndex((item) => item.coordinates === city.coordinates) !== -1
+  );
 };
 
-export const toggleFavorite = (
+const toggleFavorite = (
   state: CityWeatherResponse[],
   payload: CityWeatherResponse
 ) => {
   let favorites;
-  if (isAFavorite(state, payload) === -1) {
+  if (!isAFavorite(state, payload)) {
     favorites = [...state, payload];
   } else {
     favorites = state.filter(
@@ -34,6 +36,21 @@ export const toggleFavorite = (
   return sortFavorites(favorites);
 };
 
+const removeFavorite = (
+  state: CityWeatherResponse[],
+  payload: CityWeatherResponse
+) => {
+  if (isAFavorite(state, payload)) {
+    const favorites = state.filter(
+      (city) => city.coordinates !== payload.coordinates
+    );
+    localStorage.setItem("favorites", JSON.stringify(sortFavorites(favorites)));
+    return sortFavorites(favorites);
+  }
+
+  return state;
+};
+
 export const favoriteReducer = (
   state: CityWeatherResponse[],
   { type, payload }: FavoriteAction
@@ -41,6 +58,8 @@ export const favoriteReducer = (
   switch (type) {
     case "TOGGLE_FAVORITE":
       return toggleFavorite(state, payload);
+    case "REMOVE_FAVORITE":
+      return removeFavorite(state, payload);
     default:
       return state;
   }
