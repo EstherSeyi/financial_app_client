@@ -15,7 +15,7 @@ export default function Home() {
   const { data: cities } = useGetCities();
   const { data, isLoading, isError } = useGetCitiesWeather(cities);
 
-  const handleFavourite = (city: CityWeatherResponse) => {
+  const handleFavorite = (city: CityWeatherResponse) => {
     queryClient.setQueryData(
       weatherKeys.citiesWeatherDetails(),
       (oldData?: CityWeatherResponse[]) => {
@@ -34,7 +34,20 @@ export default function Home() {
     });
   };
 
-  console.log({ favorites });
+  const handleDeleteCity = (city: CityWeatherResponse) => {
+    queryClient.setQueryData(
+      weatherKeys.citiesWeatherDetails(),
+      (oldData?: CityWeatherResponse[]) => {
+        return oldData?.filter(
+          (weather) => weather.coordinates !== city.coordinates
+        );
+      }
+    );
+    dispatch({
+      type: "REMOVE_FAVORITE",
+      payload: city,
+    });
+  };
 
   return isLoading ? (
     "Loading..."
@@ -51,13 +64,16 @@ export default function Home() {
                 <CityItem
                   key={city.coordinates}
                   city={city}
-                  handleFavourite={handleFavourite}
+                  handleFavorite={handleFavorite}
+                  handleDeleteCity={handleDeleteCity}
                 />
               ))}
             </div>
           ) : (
             <div>
-              <span>No favorite city yet.</span>
+              <span className="font-light italic text-sm">
+                No favorite city yet.
+              </span>
             </div>
           )}
         </div>
@@ -65,15 +81,24 @@ export default function Home() {
       <section className="mt-6">
         <div>
           <h2 className="font-bold text-sm mb-2">OTHERS</h2>
-          <ul>
-            {data?.map((city: CityWeatherResponse) => (
-              <CityItem
-                key={city.coordinates}
-                city={city}
-                handleFavourite={handleFavourite}
-              />
-            ))}
-          </ul>
+          {data.length ? (
+            <div>
+              {data.map((city: CityWeatherResponse) => (
+                <CityItem
+                  key={city.coordinates}
+                  city={city}
+                  handleFavorite={handleFavorite}
+                  handleDeleteCity={handleDeleteCity}
+                />
+              ))}
+            </div>
+          ) : (
+            <div>
+              <span className="font-light italic text-sm">
+                No more city on your list.
+              </span>
+            </div>
+          )}
         </div>
       </section>
     </>
