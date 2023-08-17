@@ -10,13 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@heroicons/react": "^2.0.18",
     "@tanstack/query-sync-storage-persister": "^4.32.6",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-persist-client": "^4.32.6",
     "axios": "^1.4.0",
     "lodash.differencewith": "^4.5.0",
     "lodash.groupby": "^4.6.0",
+    "lucide-react": "^0.268.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.15.0"

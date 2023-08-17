@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { StarIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { StarIcon, TrashIcon } from "lucide-react";
 
 import { CityWeatherResponse } from "../types/index";
 
@@ -45,11 +45,12 @@ const CityItem = ({
             </button>
           </div>
           <div className="flex flex-col justify-between">
-            <button
-              className={`self-end ${city.favourite ? "text-yellow-300" : ""}`}
-              onClick={() => handleFavorite(city)}
-            >
-              <StarIcon className="w-8 h-8" />
+            <button className="self-end" onClick={() => handleFavorite(city)}>
+              <StarIcon
+                className={`w-8 h-8 ${
+                  city.favourite ? "text-yellow-300 fill-yellow-300" : ""
+                }`}
+              />
             </button>
             <p className="text-[#dde0e4ff] text-3xl font-light">
               {city.current.temperature}°
