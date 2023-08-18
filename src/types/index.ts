@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 export type City = {
   name: string;
   latitude: number;
@@ -88,4 +90,11 @@ export type NoteAction = {
 export type DeleteNotePayload = {
   notes: Note[];
   coord: string;
+};
+
+export type DetailType = {
+  label: string;
+  value: string | number;
+  icon: LucideIcon;
+  unit: string;
 };

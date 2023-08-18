@@ -8,23 +8,38 @@ import {
   CityWeatherResponse,
   WeatherAPIError,
 } from "../types";
-import { getFavorites } from "../helpers/favorites";
+import {
+  getFavorites,
+  getGroupedFavouriteCityWeather,
+} from "../helpers/favorites";
 
 export const queryKeys = {
-  cityWeather: (cityCoord: string) => [cityCoord, "weather_details"],
+  cityWeather: (cityName: string) => [cityName, "weather_details"],
   citiesWeatherDetails: () => ["cities_weather_details"],
 };
 
-export function useGetCityWeather(cityCoord: string) {
+export function useGetCityWeather(cityName: string) {
   return useQuery(
-    queryKeys.cityWeather(cityCoord),
+    queryKeys.cityWeather(cityName),
     async () => {
-      const cityWeatherDet = await weatherRequest.get("/current", {
-        params: {
-          query: cityCoord,
-        },
-      });
-      cityWeatherDet.data.coordinates = `${cityWeatherDet?.data?.location?.lat},${cityWeatherDet?.data?.location?.lon}`;
+      const cityWeatherDet = await weatherRequest.get<CityWeatherResponse>(
+        "/current",
+        {
+          params: {
+            query: cityName,
+          },
+        }
+      );
+
+      const coords = `${cityWeatherDet?.data?.location?.lat},${cityWeatherDet?.data?.location?.lon}`;
+      const favouriteCitiesWeather = getFavorites() as WeatherResponse[];
+      const groupedFavouriteCityWeather = getGroupedFavouriteCityWeather(
+        favouriteCitiesWeather
+      );
+      const isFavourite = Boolean(groupedFavouriteCityWeather[coords]);
+      cityWeatherDet.data.favourite = isFavourite;
+      cityWeatherDet.data.coordinates = coords;
+      cityWeatherDet.data.population = 0;
       return cityWeatherDet;
     },
     {
@@ -51,14 +66,8 @@ export function useGetCitiesWeather(cities: City[]) {
       const citiesWeather = await Promise.all(queries);
 
       const favouriteCitiesWeather = getFavorites() as WeatherResponse[];
-
-      const groupedFavouriteCityWeather = favouriteCitiesWeather.reduce(
-        (acca, city) => {
-          const coords = city.location.lat + "," + city.location.lon;
-          acca[coords] = city;
-          return acca;
-        },
-        {} as Record<string, WeatherResponse>
+      const groupedFavouriteCityWeather = getGroupedFavouriteCityWeather(
+        favouriteCitiesWeather
       );
 
       return citiesWeather.map((weather, index) => {

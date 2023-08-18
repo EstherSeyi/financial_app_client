@@ -3,15 +3,26 @@ import { ChangeEvent, useReducer, useState } from "react";
 import { useGetCityWeather } from "../hooks/weather";
 import { getAllNotes, notesReducer } from "../helpers/notes";
 import { Note } from "../types";
-import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import {
+  Cloud,
+  Trash2Icon,
+  PenSquareIcon,
+  WindIcon,
+  ThermometerIcon,
+  DropletsIcon,
+  SunIcon,
+  Star,
+} from "lucide-react";
+import DetailBox from "../components/WeatherItemDetail";
 
 const initialNote = { text: "", createdAt: "", coord: "" };
 
 export default function CityDetails() {
   const params = useParams();
-  const [allNotes, dispatch] = useReducer(notesReducer, getAllNotes());
   const [note, setNote] = useState(initialNote);
   const [notesToDelete, setNotesToDelete] = useState<Note[] | []>([]);
+
+  const [allNotes, dispatch] = useReducer(notesReducer, getAllNotes());
 
   const { data, isLoading, isError } = useGetCityWeather(
     params.cityId as string
@@ -47,7 +58,7 @@ export default function CityDetails() {
   const handleDeleteNote = () => {
     dispatch({
       type: "DELETE_NOTE",
-      payload: { notes: notesToDelete, coord: data?.coordinates },
+      payload: { notes: notesToDelete, coord: data?.coordinates ?? "" },
     });
 
     setNotesToDelete([]);
@@ -57,7 +68,9 @@ export default function CityDetails() {
     setNote(note);
   };
 
-  const notes = allNotes[data?.coordinates] ?? [];
+  const notes = data ? allNotes[data.coordinates] : [];
+
+  console.log({ data });
 
   return isLoading ? (
     "Loading..."
@@ -65,34 +78,93 @@ export default function CityDetails() {
     "Errored"
   ) : (
     <section className="flex mt-8 flex-col md:flex-row">
-      <div className="flex justify-between flex-1 md:mr-8 mb-6 md:mb-0">
-        <div>
-          <h1 className="text-4xl text-[#dde0e4] mb-2 font-medium">
-            {data.location.name}
-          </h1>
-          <p className="text-[#9399a2] font-light">
-            {data.current.weather_descriptions[0]}
-          </p>
-          <p className="text-5xl font-semibold mt-8 text-[#dde0e4]">
-            {data.current.temperature}
-            <span className="ml-1">°</span>
-          </p>
+      <div className="flex-1 md:mr-8 md:self-start">
+        <div className="flex justify-between mb-6">
+          <div>
+            <h1 className="flex items-center gap-2 text-4xl text-[#dde0e4] mb-0 font-medium">
+              {data.location.name}
+
+              <button>
+                <Star className="text-yellow-300 fill-yellow-300" size={24} />
+              </button>
+            </h1>
+            <h2 className="mb-2 text-[#dde0e4]">{data.location.country}</h2>
+            <p className="text-[#9399a2] font-light">
+              {data.current.weather_descriptions[0]}
+            </p>
+            <p className="text-5xl font-semibold mt-8 text-[#dde0e4]">
+              {data.current.temperature}
+              <span className="ml-1">°</span>
+            </p>
+          </div>
+          <div className="self-start">
+            {data.current.weather_icons.map((icon: string) => (
+              <div key={icon}>
+                <img
+                  src={icon}
+                  alt="picture of the sun"
+                  width={100}
+                  height={100}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="self-start">
-          {data.current.weather_icons.map((icon: string) => (
-            <div key={icon}>
-              <img
-                src={icon}
-                alt="picture of the sun"
-                width={100}
-                height={100}
-              />
-            </div>
-          ))}
+
+        <div className="bg-[#202b3b] p-4 rounded-xl mb-6 md:mb-0 md:pb-8">
+          <p className="mb-4">
+            <span className="mr-1 font-light">Observation Time:</span>{" "}
+            <span className=" text-[#c4cad3]">
+              {data.current.observation_time}
+            </span>
+          </p>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
+            <DetailBox
+              value={data.current.feelslike}
+              unit="°"
+              label="Feels Like"
+              icon={ThermometerIcon}
+            />
+            <DetailBox
+              value={data.current.wind_speed}
+              unit="km/hr"
+              label="Wind Speed"
+              icon={WindIcon}
+            />
+
+            <DetailBox
+              value={data.current.uv_index}
+              unit="°C"
+              label="UV Index"
+              icon={SunIcon}
+            />
+
+            <DetailBox
+              value={data.current.wind_dir}
+              unit=""
+              label="Wind Direction"
+              icon={WindIcon}
+            />
+
+            <DetailBox
+              value={data.current.humidity}
+              unit="%"
+              label="Humidity"
+              icon={DropletsIcon}
+            />
+
+            <DetailBox
+              value={data.current.cloudcover}
+              unit="%"
+              label="Cloud Cover"
+              icon={Cloud}
+            />
+          </div>
         </div>
       </div>
 
-      <div className="basis-5/12 lg:basis-4/12 bg-[#202b3b] p-4 rounded-xl">
+      <div className="basis-5/12 lg:basis-4/12 bg-[#202b3b] p-4 rounded-xl md:self-start">
         <form onSubmit={handleSaveNotes}>
           <textarea
             value={note.text}
@@ -125,11 +197,11 @@ export default function CityDetails() {
                 onClick={handleDeleteNote}
               >
                 <span className="mr-2">Delete</span>
-                <TrashIcon className="w-4 h-4" />
+                <Trash2Icon className="w-4 h-4" />
               </button>
             ) : null}
           </div>
-          {notes.length ? (
+          {notes && notes.length ? (
             <>
               {notes.map((item) => (
                 <li
@@ -154,7 +226,7 @@ export default function CityDetails() {
                       className="block ml-auto"
                       onClick={() => handleEditNote(item)}
                     >
-                      <PencilSquareIcon className="w-4 h-4" />
+                      <PenSquareIcon className="w-4 h-4" />
                     </button>
                   </div>
                 </li>

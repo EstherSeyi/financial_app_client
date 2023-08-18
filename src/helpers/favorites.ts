@@ -1,9 +1,18 @@
-import { FavoriteAction, CityWeatherResponse } from "../types";
+import { FavoriteAction, CityWeatherResponse, WeatherResponse } from "../types";
 
 export const getFavorites = () => {
   const favString = localStorage.getItem("favorites");
   return favString ? JSON.parse(favString) : [];
 };
+
+export const getGroupedFavouriteCityWeather = (
+  favouriteCitiesWeather: WeatherResponse[]
+) =>
+  favouriteCitiesWeather.reduce((acca, city) => {
+    const coords = city.location.lat + "," + city.location.lon;
+    acca[coords] = city;
+    return acca;
+  }, {} as Record<string, WeatherResponse>);
 
 const sortFavorites = (favorites: CityWeatherResponse[]) => {
   return favorites.sort((a: CityWeatherResponse, b: CityWeatherResponse) =>
@@ -32,6 +41,7 @@ const toggleFavorite = (
       (city) => city.coordinates !== payload.coordinates
     );
   }
+
   localStorage.setItem("favorites", JSON.stringify(sortFavorites(favorites)));
   return sortFavorites(favorites);
 };
