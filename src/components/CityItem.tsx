@@ -1,7 +1,10 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { StarIcon, TrashIcon } from "lucide-react";
 
 import { CityWeatherResponse } from "../types/index";
+import { getFavorites, isAFavorite } from "../helpers/favorites";
+import { formatNumber } from "../utils/format";
 
 const CityItem = ({
   city,
@@ -12,6 +15,12 @@ const CityItem = ({
   handleFavorite: (city: CityWeatherResponse) => void;
   handleDeleteCity: (city: CityWeatherResponse) => void;
 }) => {
+  const isFav = useMemo(
+    () => isAFavorite(getFavorites(), city),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [city.coordinates, getFavorites()?.length]
+  );
+
   return (
     <div className="block mb-4 border-2 border-highlightBlue hover:bg-transparent focus:bg-transparent transition-all py-4 px-6 rounded-2xl bg-[#202b3b]">
       <div className="flex flex-wrap">
@@ -30,12 +39,16 @@ const CityItem = ({
           <div className="flex flex-col justify-between">
             <div>
               <Link
-                to={`/${city.location.name.toLocaleLowerCase()}`}
+                to={`/${city.location.name.toLocaleLowerCase()}?lat=${
+                  city.location.lat
+                }&lon=${city.location.lon}`}
                 className="font-semibold text-3xl text-[#dde0e4ff] mb-1 hover:underline"
               >
                 {city.location.name}
               </Link>
-              <p>10:23</p>
+              <p className="text-sm font-light">
+                Population est.: {formatNumber(city.population)}
+              </p>
             </div>
             <button
               className="text-sm self-start"
@@ -48,7 +61,7 @@ const CityItem = ({
             <button className="self-end" onClick={() => handleFavorite(city)}>
               <StarIcon
                 className={`w-8 h-8 ${
-                  city.favourite ? "text-yellow-300 fill-yellow-300" : ""
+                  isFav ? "text-yellow-300 fill-yellow-300" : ""
                 }`}
               />
             </button>

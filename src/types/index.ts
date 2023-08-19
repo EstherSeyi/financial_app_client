@@ -47,7 +47,6 @@ export type WeatherResponse = {
 };
 
 export type CityWeatherResponse = WeatherResponse & {
-  favourite: boolean;
   population: number;
   coordinates: string;
 };
@@ -97,4 +96,14 @@ export type DetailType = {
   value: string | number;
   icon: LucideIcon;
   unit: string;
+};
+
+export type IPResponse = {
+  city: string;
+  country: string;
+  ip: string;
+  loc: string;
+  org: string;
+  region: string;
+  timezone: string;
 };

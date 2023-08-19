@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
-import { ChangeEvent, useReducer, useState } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import { ChangeEvent, useMemo, useReducer, useState } from "react";
 import { useGetCityWeather } from "../hooks/weather";
 import { getAllNotes, notesReducer } from "../helpers/notes";
 import { Note } from "../types";
@@ -14,8 +14,19 @@ import {
   Star,
 } from "lucide-react";
 import DetailBox from "../components/WeatherItemDetail";
+import {
+  favoriteReducer,
+  getFavorites,
+  isAFavorite,
+} from "../helpers/favorites";
+import { formatCoord } from "../utils/format";
+import { useSearchCityByName } from "../hooks/city";
 
 const initialNote = { text: "", createdAt: "", coord: "" };
+function useURLQuery() {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+}
 
 export default function CityDetails() {
   const params = useParams();
@@ -23,10 +34,45 @@ export default function CityDetails() {
   const [notesToDelete, setNotesToDelete] = useState<Note[] | []>([]);
 
   const [allNotes, dispatch] = useReducer(notesReducer, getAllNotes());
+  const [, favoriteDispatch] = useReducer(favoriteReducer, getFavorites());
+  const urlQuery = useURLQuery();
+  const coord =
+    urlQuery.get("lat") && urlQuery.get("lon")
+      ? formatCoord(urlQuery.get("lat"), urlQuery.get("lon"))
+      : null;
+
+  const { data: cityByNameData } = useSearchCityByName(params.cityId as string);
+  const cityPopulation = useMemo(
+    () => cityByNameData && cityByNameData[0]?.population,
+    [cityByNameData]
+  );
 
   const { data, isLoading, isError } = useGetCityWeather(
-    params.cityId as string
+    coord ?? (params.cityId as string)
   );
+
+  const isFav = useMemo(
+    () => {
+      if (data) return isAFavorite(getFavorites(), data);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data?.coordinates, getFavorites()?.length]
+  );
+
+  const handleFavorite = () => {
+    if (data)
+      favoriteDispatch(
+        cityPopulation
+          ? {
+              type: "TOGGLE_FAVORITE",
+              payload: { ...data, population: cityPopulation },
+            }
+          : {
+              type: "TOGGLE_FAVORITE",
+              payload: data,
+            }
+      );
+  };
 
   const handleSaveNotes = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,8 +116,6 @@ export default function CityDetails() {
 
   const notes = data ? allNotes[data.coordinates] : [];
 
-  console.log({ data });
-
   return isLoading ? (
     "Loading..."
   ) : isError ? (
@@ -84,8 +128,13 @@ export default function CityDetails() {
             <h1 className="flex items-center gap-2 text-4xl text-[#dde0e4] mb-0 font-medium">
               {data.location.name}
 
-              <button>
-                <Star className="text-yellow-300 fill-yellow-300" size={24} />
+              <button onClick={handleFavorite}>
+                <Star
+                  className={`${
+                    isFav ? "text-yellow-300 fill-yellow-300" : ""
+                  }`}
+                  size={24}
+                />
               </button>
             </h1>
             <h2 className="mb-2 text-[#dde0e4]">{data.location.country}</h2>

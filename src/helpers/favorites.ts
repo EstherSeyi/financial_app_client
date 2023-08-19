@@ -5,10 +5,10 @@ export const getFavorites = () => {
   return favString ? JSON.parse(favString) : [];
 };
 
-export const getGroupedFavouriteCityWeather = (
-  favouriteCitiesWeather: WeatherResponse[]
+export const getGroupedFavoriteCityWeather = (
+  favoriteCitiesWeather: WeatherResponse[]
 ) =>
-  favouriteCitiesWeather.reduce((acca, city) => {
+  favoriteCitiesWeather.reduce((acca, city) => {
     const coords = city.location.lat + "," + city.location.lon;
     acca[coords] = city;
     return acca;
@@ -24,9 +24,8 @@ export const isAFavorite = (
   favorites: CityWeatherResponse[],
   city: CityWeatherResponse
 ) => {
-  return (
-    favorites.findIndex((item) => item.coordinates === city.coordinates) !== -1
-  );
+  const groupedFavorites = getGroupedFavoriteCityWeather(favorites);
+  return Boolean(groupedFavorites[city.coordinates]);
 };
 
 const toggleFavorite = (
