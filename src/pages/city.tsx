@@ -10,7 +10,6 @@ import {
   WindIcon,
   ThermometerIcon,
   DropletsIcon,
-  SunIcon,
   Star,
 } from "lucide-react";
 import DetailBox from "../components/WeatherItemDetail";
@@ -36,36 +35,42 @@ export default function CityDetails() {
   const [allNotes, dispatch] = useReducer(notesReducer, getAllNotes());
   const [, favoriteDispatch] = useReducer(favoriteReducer, getFavorites());
   const urlQuery = useURLQuery();
-  const coord =
-    urlQuery.get("lat") && urlQuery.get("lon")
-      ? formatCoord(urlQuery.get("lat"), urlQuery.get("lon"))
-      : null;
 
   const { data: singleCityData } = useGetSingleCity(params.cityId as string);
-  const cityPopulation = useMemo(
-    () => singleCityData && singleCityData[0]?.fields?.population,
+  const singleCity = useMemo(
+    () => singleCityData && singleCityData[0]?.fields,
     [singleCityData]
   );
 
-  const { data, isLoading, isError } = useGetCityWeather(
-    coord ?? (params.cityId as string)
-  );
+  const { data, isLoading, isError } = useGetCityWeather({
+    lat: urlQuery.get("lat"),
+    lon: urlQuery.get("lon"),
+  });
 
   const isFav = useMemo(
     () => {
       if (data) return isAFavorite(getFavorites(), data);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data?.coordinates, getFavorites()?.length]
+    [data?.id, getFavorites()?.length]
+  );
+
+  const coord = useMemo(
+    () =>
+      formatCoord(
+        data?.coord?.lat as number,
+        data?.coord?.lon as number
+      ) as string,
+    [data?.coord?.lat, data?.coord?.lon]
   );
 
   const handleFavorite = () => {
     if (data)
       favoriteDispatch(
-        cityPopulation
+        singleCity?.population
           ? {
               type: "TOGGLE_FAVORITE",
-              payload: { ...data, population: cityPopulation },
+              payload: { ...data, population: singleCity?.population },
             }
           : {
               type: "TOGGLE_FAVORITE",
@@ -104,7 +109,10 @@ export default function CityDetails() {
   const handleDeleteNote = () => {
     dispatch({
       type: "DELETE_NOTE",
-      payload: { notes: notesToDelete, coord: data?.coordinates ?? "" },
+      payload: {
+        notes: notesToDelete,
+        coord,
+      },
     });
 
     setNotesToDelete([]);
@@ -114,7 +122,7 @@ export default function CityDetails() {
     setNote(note);
   };
 
-  const notes = data ? allNotes[data.coordinates] : [];
+  const notes = data ? allNotes[coord] : [];
 
   return isLoading ? (
     "Loading..."
@@ -126,7 +134,7 @@ export default function CityDetails() {
         <div className="flex justify-between mb-6">
           <div>
             <h1 className="flex items-center gap-2 text-4xl text-[#dde0e4] mb-0 font-medium">
-              {data.location.name}
+              {data?.name}
 
               <button onClick={handleFavorite}>
                 <Star
@@ -137,21 +145,22 @@ export default function CityDetails() {
                 />
               </button>
             </h1>
-            <h2 className="mb-2 text-[#dde0e4]">{data.location.country}</h2>
+            <h2 className="mb-2 text-[#dde0e4]">{singleCity?.country}</h2>
             <p className="text-[#9399a2] font-light">
-              {data.current.weather_descriptions[0]}
+              {data?.weather[0]?.description}
             </p>
             <p className="text-5xl font-semibold mt-8 text-[#dde0e4]">
-              {data.current.temperature}
+              {data?.main?.temp}
               <span className="ml-1">°</span>
             </p>
           </div>
           <div className="self-start">
-            {data.current.weather_icons.map((icon: string) => (
-              <div key={icon}>
+            {data.weather.map((item) => (
+              <div key={item.id}>
                 <img
-                  src={icon}
-                  alt="picture of the sun"
+                  // src={icon}
+                  src={`https://openweathermap.org/img/wn/${item?.icon}.png`}
+                  alt={item.description}
                   width={100}
                   height={100}
                 />
@@ -164,47 +173,47 @@ export default function CityDetails() {
           <p className="mb-4">
             <span className="mr-1 font-light">Observation Time:</span>{" "}
             <span className=" text-[#c4cad3]">
-              {data.current.observation_time}
+              {/* {data.current.observation_time} */}
             </span>
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
             <DetailBox
-              value={data.current.feelslike}
+              value={data?.main?.feels_like}
               unit="°"
               label="Feels Like"
               icon={ThermometerIcon}
             />
             <DetailBox
-              value={data.current.wind_speed}
+              value={data?.wind?.speed}
               unit="km/hr"
               label="Wind Speed"
               icon={WindIcon}
             />
 
-            <DetailBox
+            {/* <DetailBox
               value={data.current.uv_index}
               unit="°C"
               label="UV Index"
               icon={SunIcon}
-            />
+            /> */}
 
-            <DetailBox
+            {/* <DetailBox
               value={data.current.wind_dir}
               unit=""
               label="Wind Direction"
               icon={WindIcon}
-            />
+            /> */}
 
             <DetailBox
-              value={data.current.humidity}
+              value={data?.main?.humidity}
               unit="%"
               label="Humidity"
               icon={DropletsIcon}
             />
 
             <DetailBox
-              value={data.current.cloudcover}
+              value={data?.clouds?.all}
               unit="%"
               label="Cloud Cover"
               icon={Cloud}
@@ -223,7 +232,7 @@ export default function CityDetails() {
               setNote((note) => ({
                 ...note,
                 text: target.value,
-                coord: data?.coordinates,
+                coord: coord,
               }));
             }}
           />

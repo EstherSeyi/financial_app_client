@@ -16,6 +16,9 @@ export const formatNumber = (num: number, precision: number = 1) => {
   return num;
 };
 
-export const formatCoord = (lat: string | null, lon: string | null) => {
+export const formatCoord = (
+  lat: string | number | null,
+  lon: string | number | null
+) => {
   return lat && lon ? `${lat},${lon}` : null;
 };

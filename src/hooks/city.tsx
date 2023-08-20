@@ -33,7 +33,6 @@ export function useGetCities() {
 }
 
 export const useSearchCityByName = (cityName: string) => {
-  console.log({ cityName });
   return useQuery(
     queryKeys.searchCityByName(cityName),
     () =>
@@ -46,7 +45,6 @@ export const useSearchCityByName = (cityName: string) => {
     {
       enabled: Boolean(cityName),
       select: (response) => {
-        console.log({ response }, "LIE");
         return response.data.records;
       },
       staleTime: 3600000,

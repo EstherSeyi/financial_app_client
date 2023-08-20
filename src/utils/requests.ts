@@ -24,6 +24,13 @@ export const weatherRequest = axios.create({
     access_key: import.meta.env.VITE_WEATHERSTACK_API_KEY,
   },
 });
+export const weatherRequest2 = axios.create({
+  baseURL: import.meta.env.VITE_OPEN_WEATHER_BASE_URL,
+  cancelToken: source.token,
+  params: {
+    appid: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
+  },
+});
 
 export const geolocationRequest = axios.create({
   baseURL: import.meta.env.VITE_GEOLOCATION_BASE_URL,

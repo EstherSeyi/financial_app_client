@@ -1,39 +1,48 @@
 import { AxiosError } from "axios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-import { weatherRequest } from "../utils/requests";
+import { weatherRequest2 } from "../utils/requests";
 import {
-  WeatherResponse,
-  CityWeatherResponse,
   WeatherAPIError,
   City2,
+  WeatherResponse2,
+  CityWeatherResponse2,
 } from "../types";
 
+type Coord = {
+  lat: string | null;
+  lon: string | null;
+};
+
 export const queryKeys = {
-  cityWeather: (cityQuery: string) => [cityQuery, "weather_details"],
+  cityWeather: (cityCord: Coord) => [
+    cityCord.lat,
+    cityCord.lon,
+    "weather_details",
+  ],
   citiesWeatherDetails: () => ["cities_weather_details"],
 };
 
-export function useGetCityWeather(cityQuery: string) {
+export function useGetCityWeather(cityCord: Coord) {
   return useQuery(
-    queryKeys.cityWeather(cityQuery),
+    queryKeys.cityWeather(cityCord),
     async () => {
-      const cityWeatherDet = await weatherRequest.get<
-        CityWeatherResponse | WeatherAPIError
-      >("/current", {
+      const cityWeatherDet = await weatherRequest2.get<
+        CityWeatherResponse2 | WeatherAPIError
+      >("/weather", {
         params: {
-          query: cityQuery,
+          lat: cityCord?.lat,
+          lon: cityCord?.lon,
         },
       });
       if ("error" in cityWeatherDet.data) {
         throw new Error(cityWeatherDet.data.error.info);
       }
-      const coords = `${cityWeatherDet?.data?.location?.lat},${cityWeatherDet?.data?.location?.lon}`;
-      cityWeatherDet.data.coordinates = coords;
+
       return cityWeatherDet;
     },
     {
-      select: (response) => response.data as CityWeatherResponse,
+      select: (response) => response.data as CityWeatherResponse2,
       staleTime: 3600000,
     }
   );
@@ -41,10 +50,11 @@ export function useGetCityWeather(cityQuery: string) {
 
 export function useGetCitiesWeather(cities: City2[]) {
   const queries = cities?.map(async (city) => {
-    return weatherRequest
-      .get<WeatherResponse | WeatherAPIError>("/current", {
+    return weatherRequest2
+      .get<WeatherResponse2 | WeatherAPIError>("/weather", {
         params: {
-          query: `${city?.fields?.latitude},${city?.fields?.longitude}`,
+          lat: city?.fields?.latitude,
+          lon: city?.fields?.longitude,
         },
       })
       .then((response) => {
@@ -62,12 +72,9 @@ export function useGetCitiesWeather(cities: City2[]) {
     queryKeys.citiesWeatherDetails(),
     async () => {
       const citiesWeather = await Promise.all(queries);
-
       return citiesWeather.map((weather, index) => {
-        const coords = weather?.location?.lat + "," + weather?.location?.lon;
-        const cityWeather: CityWeatherResponse = {
+        const cityWeather: CityWeatherResponse2 = {
           ...weather,
-          coordinates: coords,
           population: cities[index]?.fields.population ?? 0,
         };
 
@@ -77,11 +84,12 @@ export function useGetCitiesWeather(cities: City2[]) {
     {
       enabled: Boolean(cities?.length),
       select: (response) => {
-        return response.sort((a: CityWeatherResponse, b: CityWeatherResponse) =>
-          a.location.name < b.location.name ? -1 : 1
+        return response.sort(
+          (a: CityWeatherResponse2, b: CityWeatherResponse2) =>
+            a?.name < b.name ? -1 : 1
         );
       },
       staleTime: 3600000,
     }
-  ) as UseQueryResult<CityWeatherResponse[], AxiosError<WeatherAPIError>>;
+  ) as UseQueryResult<CityWeatherResponse2[], AxiosError<WeatherAPIError>>;
 }

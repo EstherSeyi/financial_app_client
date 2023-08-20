@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { StarIcon, TrashIcon } from "lucide-react";
 
-import { CityWeatherResponse } from "../types/index";
+import { CityWeatherResponse2 } from "../types/index";
 import { getFavorites, isAFavorite } from "../helpers/favorites";
 import { formatNumber } from "../utils/format";
 
@@ -11,24 +11,26 @@ const CityItem = ({
   handleFavorite,
   handleDeleteCity,
 }: {
-  city: CityWeatherResponse;
-  handleFavorite: (city: CityWeatherResponse) => void;
-  handleDeleteCity: (city: CityWeatherResponse) => void;
+  city: CityWeatherResponse2;
+  handleFavorite: (city: CityWeatherResponse2) => void;
+  handleDeleteCity: (city: CityWeatherResponse2) => void;
 }) => {
   const isFav = useMemo(
     () => isAFavorite(getFavorites(), city),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [city.coordinates, getFavorites()?.length]
+    [city.id, getFavorites()?.length]
   );
+
+  // https://openweathermap.org/img/wn/10d@2x.png
 
   return (
     <div className="block mb-4 border-2 border-highlightBlue hover:bg-transparent focus:bg-transparent transition-all py-4 px-6 rounded-2xl bg-[#202b3b]">
       <div className="flex flex-wrap">
-        {city.current.weather_icons.length && (
+        {city?.weather?.length && (
           <div className="mr-6">
             <img
-              src={city.current.weather_icons[0]}
-              alt="picture of the sun"
+              src={`https://openweathermap.org/img/wn/${city?.weather[0]?.icon}.png`}
+              alt={city?.weather[0]?.description}
               className="rounded-full"
               width={100}
               height={100}
@@ -39,12 +41,12 @@ const CityItem = ({
           <div className="flex flex-col justify-between">
             <div>
               <Link
-                to={`/${city.location.name.toLocaleLowerCase()}?lat=${
-                  city.location.lat
-                }&lon=${city.location.lon}`}
+                to={`/${city?.name.toLocaleLowerCase()}?lat=${
+                  city?.coord?.lat
+                }&lon=${city?.coord?.lon}`}
                 className="font-semibold text-3xl text-[#dde0e4ff] mb-1 hover:underline"
               >
-                {city.location.name}
+                {city?.name}
               </Link>
               <p className="text-sm font-light">
                 Population est.: {formatNumber(city.population)}
@@ -66,7 +68,7 @@ const CityItem = ({
               />
             </button>
             <p className="text-[#dde0e4ff] text-3xl font-light">
-              {city.current.temperature}°
+              {city?.main?.temp}°
             </p>
           </div>
         </div>

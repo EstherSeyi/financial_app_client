@@ -75,9 +75,56 @@ export type WeatherResponse = {
   };
 };
 
+export type WeatherResponse2 = {
+  coord: {
+    lon: number;
+    lat: number;
+  };
+  weather: [
+    {
+      id: number;
+      main: string;
+      description: string;
+      icon: string;
+    }
+  ];
+  base: string;
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+  };
+  visibility: number;
+  wind: {
+    speed: number;
+    deg: number;
+  };
+  clouds: {
+    all: number;
+  };
+  dt: number;
+  sys: {
+    type: number;
+    id: number;
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
+  timezone: number;
+  id: number;
+  name: string;
+  cod: number;
+};
+
 export type CityWeatherResponse = WeatherResponse & {
   population: number;
   coordinates: string;
+};
+export type CityWeatherResponse2 = WeatherResponse2 & {
+  population: number;
 };
 
 export type WeatherAPIError = {
@@ -97,7 +144,7 @@ export type CityListItemType = {
 
 export type FavoriteAction = {
   type: string;
-  payload: CityWeatherResponse;
+  payload: CityWeatherResponse2;
 };
 
 export type Note = {

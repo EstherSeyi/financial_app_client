@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useGetCities } from "../hooks/city";
 import CityItem from "../components/CityItem";
-import { CityWeatherResponse } from "../types";
+import { CityWeatherResponse2 } from "../types";
 import {
   queryKeys as weatherKeys,
   useGetCitiesWeather,
@@ -19,20 +19,18 @@ export default function Home() {
   const { data: cities } = useGetCities();
   const { data, isLoading, isError, error } = useGetCitiesWeather(cities);
 
-  const handleFavorite = (city: CityWeatherResponse) => {
+  const handleFavorite = (city: CityWeatherResponse2) => {
     dispatch({
       type: "TOGGLE_FAVORITE",
       payload: city,
     });
   };
 
-  const handleDeleteCity = (city: CityWeatherResponse) => {
+  const handleDeleteCity = (city: CityWeatherResponse2) => {
     queryClient.setQueryData(
       weatherKeys.citiesWeatherDetails(),
-      (oldData?: CityWeatherResponse[]) => {
-        return oldData?.filter(
-          (weather) => weather.coordinates !== city.coordinates
-        );
+      (oldData?: CityWeatherResponse2[]) => {
+        return oldData?.filter((weather) => weather.id !== city.id);
       }
     );
     dispatch({
@@ -66,9 +64,9 @@ export default function Home() {
               <h2 className="font-bold text-sm mb-2 ">FAVORITES</h2>
               {favorites.length ? (
                 <div>
-                  {favorites?.map((city: CityWeatherResponse) => (
+                  {favorites?.map((city: CityWeatherResponse2) => (
                     <CityItem
-                      key={city.coordinates}
+                      key={city.id}
                       city={city}
                       handleFavorite={handleFavorite}
                       handleDeleteCity={handleDeleteCity}
@@ -89,9 +87,9 @@ export default function Home() {
               <h2 className="font-bold text-sm mb-2">OTHERS</h2>
               {data.length ? (
                 <div>
-                  {data.map((city: CityWeatherResponse) => (
+                  {data.map((city: CityWeatherResponse2) => (
                     <CityItem
-                      key={city.coordinates}
+                      key={city.id}
                       city={city}
                       handleFavorite={handleFavorite}
                       handleDeleteCity={handleDeleteCity}
