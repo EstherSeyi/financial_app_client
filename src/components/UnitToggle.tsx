@@ -4,8 +4,6 @@ import { ChangeEvent } from "react";
 
 const UnitToggle = () => {
   const { unit, handleUnit } = useUnit();
-
-  console.log({ unit });
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     handleUnit(event.target.value);
   };
