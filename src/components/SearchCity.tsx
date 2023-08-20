@@ -3,18 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon } from "lucide-react";
 import { useSearchCityByName } from "../hooks/city";
-import { City } from "../types";
+import { City2 } from "../types";
 
 const SearchCity = () => {
-  const [selected, setSelected] = useState<City | null>(null);
+  const [selected, setSelected] = useState<City2 | null>(null);
   const [query, setQuery] = useState("");
   const { data, isLoading, isError } = useSearchCityByName(query);
   const navigate = useNavigate();
 
-  const handleSelect = (selected: City) => {
+  const handleSelect = (selected: City2) => {
     setSelected(selected);
     navigate(
-      `/${selected.name}?lat=${selected.latitude}&lon=${selected.longitude}`
+      `/${selected?.fields?.name}?lat=${selected?.fields?.latitude}&lon=${selected?.fields?.longitude}`
     );
     setSelected(null);
   };
@@ -27,7 +27,7 @@ const SearchCity = () => {
             <Combobox.Input
               placeholder="Search By City Name..."
               className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-highlightBlue"
-              displayValue={(city: City) => city?.name}
+              displayValue={(city: City2) => city?.fields?.name}
               onChange={(event) => setQuery(event.target.value)}
             />
           </div>
@@ -50,7 +50,7 @@ const SearchCity = () => {
               ) : (
                 data.map((city) => (
                   <Combobox.Option
-                    key={`${city.latitude},${city.longitude}`}
+                    key={`${city?.fields?.latitude},${city?.fields?.longitude}`}
                     className={({ active }) =>
                       `relative cursor-default select-none py-4 pl-10 pr-4 ${
                         active
@@ -69,9 +69,9 @@ const SearchCity = () => {
                                 selected ? "font-medium" : "font-normal"
                               }`}
                             >
-                              {city.name}
+                              {city?.fields?.name}
                             </span>
-                            <span>{city.country}</span>
+                            <span>{city?.fields?.country}</span>
                           </span>
                           <span className="text-xl">31°</span>
                         </span>

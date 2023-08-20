@@ -20,7 +20,7 @@ import {
   isAFavorite,
 } from "../helpers/favorites";
 import { formatCoord } from "../utils/format";
-import { useSearchCityByName } from "../hooks/city";
+import { useGetSingleCity } from "../hooks/city";
 
 const initialNote = { text: "", createdAt: "", coord: "" };
 function useURLQuery() {
@@ -41,10 +41,10 @@ export default function CityDetails() {
       ? formatCoord(urlQuery.get("lat"), urlQuery.get("lon"))
       : null;
 
-  const { data: cityByNameData } = useSearchCityByName(params.cityId as string);
+  const { data: singleCityData } = useGetSingleCity(params.cityId as string);
   const cityPopulation = useMemo(
-    () => cityByNameData && cityByNameData[0]?.population,
-    [cityByNameData]
+    () => singleCityData && singleCityData[0]?.fields?.population,
+    [singleCityData]
   );
 
   const { data, isLoading, isError } = useGetCityWeather(

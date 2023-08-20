@@ -3,10 +3,10 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
 import { weatherRequest } from "../utils/requests";
 import {
-  City,
   WeatherResponse,
   CityWeatherResponse,
   WeatherAPIError,
+  City2,
 } from "../types";
 
 export const queryKeys = {
@@ -39,12 +39,12 @@ export function useGetCityWeather(cityQuery: string) {
   );
 }
 
-export function useGetCitiesWeather(cities: City[]) {
+export function useGetCitiesWeather(cities: City2[]) {
   const queries = cities?.map(async (city) => {
     return weatherRequest
       .get<WeatherResponse | WeatherAPIError>("/current", {
         params: {
-          query: `${city.latitude},${city.longitude}`,
+          query: `${city?.fields?.latitude},${city?.fields?.longitude}`,
         },
       })
       .then((response) => {
@@ -52,6 +52,9 @@ export function useGetCitiesWeather(cities: City[]) {
           throw new Error(response.data.error.info);
         }
         return response.data;
+      })
+      .catch((error) => {
+        throw new Error(error);
       });
   });
 
@@ -60,14 +63,12 @@ export function useGetCitiesWeather(cities: City[]) {
     async () => {
       const citiesWeather = await Promise.all(queries);
 
-      console.log({ citiesWeather });
-
       return citiesWeather.map((weather, index) => {
         const coords = weather?.location?.lat + "," + weather?.location?.lon;
         const cityWeather: CityWeatherResponse = {
           ...weather,
           coordinates: coords,
-          population: cities[index]?.population ?? 0,
+          population: cities[index]?.fields.population ?? 0,
         };
 
         return cityWeather;
@@ -76,7 +77,6 @@ export function useGetCitiesWeather(cities: City[]) {
     {
       enabled: Boolean(cities?.length),
       select: (response) => {
-        console.log({ response });
         return response.sort((a: CityWeatherResponse, b: CityWeatherResponse) =>
           a.location.name < b.location.name ? -1 : 1
         );

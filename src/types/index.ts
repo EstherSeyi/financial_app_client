@@ -9,6 +9,35 @@ export type City = {
   is_capital: boolean;
 };
 
+export type City2 = {
+  datasetid: string;
+  recordid: "d210ab247bc1dca4dfdfd54196ed4d2a63f73bb9";
+  fields: {
+    coordinates: number[];
+    latitude: string;
+    timezone: string;
+    ascii_name: string;
+    longitude: string;
+    dem: number;
+    feature_code: string;
+    geoname_id: string;
+    population: number;
+    modification_date: string;
+    alternate_names: string;
+    country_code: string;
+    admin2_code: string;
+    name: string;
+    country: string;
+    feature_class: string;
+    admin1_code: string;
+  };
+  geometry: {
+    type: string;
+    coordinates: number[];
+  };
+  record_timestamp: string;
+};
+
 export type WeatherResponse = {
   request: {
     type: string;

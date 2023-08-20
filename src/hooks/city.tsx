@@ -1,50 +1,71 @@
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
-// import { AxiosError, AxiosResponse } from "axios";
-
-import { cityRequest } from "../utils/requests";
-import { City } from "../types";
 import { AxiosError } from "axios";
+import { UseQueryResult, useQuery } from "@tanstack/react-query";
+
+import { cityRequest2 } from "../utils/requests";
+import { City2 } from "../types";
 
 export const queryKeys = {
   cities: () => ["cities"] as const,
   searchCityByName: (cityName: string) => [cityName, "city_search"] as const,
+  searchSingleCity: (cityName: string) =>
+    [cityName, "single_city_search"] as const,
   searchCityByCoord: (cityCoord: string) =>
     [cityCoord, "city_coord_search"] as const,
 };
 
 export function useGetCities() {
-  // return { data: resp.data.sort((a, b) =>  a.name < b.name ? -1 : 1) };
   return useQuery(
     queryKeys.cities(),
     () =>
-      cityRequest.get("/city", {
+      cityRequest2.get("/search", {
         params: {
-          min_population: 5000,
-          limit: 15,
+          rows: 15,
+          sort: "population",
         },
       }),
     {
-      select: (response) =>
-        response.data.sort((a: City, b: City) => (a.name < b.name ? -1 : 1)),
+      select: (response) => {
+        return response.data.records;
+      },
       staleTime: 3600000,
     }
   );
 }
 
 export const useSearchCityByName = (cityName: string) => {
+  console.log({ cityName });
   return useQuery(
     queryKeys.searchCityByName(cityName),
     () =>
-      cityRequest.get("/city", {
+      cityRequest2.get("/search", {
         params: {
-          name: cityName,
-          limit: 15,
+          rows: 15,
+          q: cityName,
         },
       }),
     {
       enabled: Boolean(cityName),
-      select: (response) => response.data,
+      select: (response) => {
+        console.log({ response }, "LIE");
+        return response.data.records;
+      },
       staleTime: 3600000,
     }
-  ) as UseQueryResult<City[], AxiosError>;
+  ) as UseQueryResult<City2[], AxiosError>;
+};
+export const useGetSingleCity = (cityName: string) => {
+  return useQuery(
+    queryKeys.searchSingleCity(cityName),
+    () =>
+      cityRequest2.get("/search", {
+        params: {
+          q: cityName,
+        },
+      }),
+    {
+      enabled: Boolean(cityName),
+      select: (response) => response.data.records,
+      staleTime: 3600000,
+    }
+  ) as UseQueryResult<City2[], AxiosError>;
 };
