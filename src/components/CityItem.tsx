@@ -5,6 +5,8 @@ import { StarIcon, TrashIcon } from "lucide-react";
 import { CityWeatherResponse2 } from "../types/index";
 import { getFavorites, isAFavorite } from "../helpers/favorites";
 import { formatNumber } from "../utils/format";
+import { useGetCityWeather } from "../hooks/weather";
+import { useUnit } from "../hooks/unit";
 
 const CityItem = ({
   city,
@@ -19,6 +21,15 @@ const CityItem = ({
     () => isAFavorite(getFavorites(), city),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [city.id, getFavorites()?.length]
+  );
+
+  const { unit } = useUnit();
+  const { data } = useGetCityWeather(
+    {
+      lat: city.coord.lat.toString(),
+      lon: city.coord.lon.toString(),
+    },
+    unit
   );
 
   return (
@@ -58,7 +69,7 @@ const CityItem = ({
             </button>
           </div>
           <div className="flex flex-col justify-between">
-            <button className="self-end" onClick={() => handleFavorite(city)}>
+            <button className="self-end" onClick={() => handleFavorite(data!)}>
               <StarIcon
                 className={`w-8 h-8 ${
                   isFav ? "text-yellow-300 fill-yellow-300" : ""
@@ -66,7 +77,7 @@ const CityItem = ({
               />
             </button>
             <p className="text-[#dde0e4ff] text-3xl font-light">
-              {city?.main?.temp}°
+              {data?.main?.temp}°
             </p>
           </div>
         </div>

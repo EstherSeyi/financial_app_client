@@ -11,6 +11,7 @@ import {
   ThermometerIcon,
   DropletsIcon,
   Star,
+  SunIcon,
 } from "lucide-react";
 import DetailBox from "../components/WeatherItemDetail";
 import { getFavorites, isAFavorite } from "../helpers/favorites";
@@ -167,7 +168,6 @@ export default function CityDetails() {
             {data.weather?.map((item) => (
               <div key={item.id}>
                 <img
-                  // src={icon}
                   src={`https://openweathermap.org/img/wn/${item?.icon}.png`}
                   alt={item.description}
                   width={100}
@@ -179,14 +179,10 @@ export default function CityDetails() {
         </div>
 
         <div className="bg-[#202b3b] p-4 rounded-xl mb-6 md:mb-0 md:pb-8">
-          <p className="mb-4">
+          {/* <p className="mb-4">
             <span className="mr-1 font-light">Observation Time:</span>{" "}
-            <span className=" text-[#c4cad3]">
-              {new Intl.DateTimeFormat("en-US", {
-                dateStyle: "full",
-              }).format(data?.dt)}
-            </span>
-          </p>
+            <span className=" text-[#c4cad3]">{data?.timezone}</span>
+          </p> */}
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
             <DetailBox
@@ -197,24 +193,24 @@ export default function CityDetails() {
             />
             <DetailBox
               value={data?.wind?.speed}
-              unit={unit === "metric" ? "mtr/sec" : "miles/hour"}
+              unit="m/sec"
               label="Wind Speed"
               icon={WindIcon}
             />
 
-            {/* <DetailBox
-              value={data.current.uv_index}
-              unit="°C"
-              label="UV Index"
+            <DetailBox
+              value={data?.visibility}
+              unit="m"
+              label="Visibility"
               icon={SunIcon}
-            /> */}
+            />
 
-            {/* <DetailBox
-              value={data.current.wind_dir}
-              unit=""
+            <DetailBox
+              value={data?.wind?.deg}
+              unit="°"
               label="Wind Direction"
               icon={WindIcon}
-            /> */}
+            />
 
             <DetailBox
               value={data?.main?.humidity}
