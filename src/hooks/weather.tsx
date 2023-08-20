@@ -42,12 +42,17 @@ export function useGetCityWeather(cityQuery: string) {
 export function useGetCitiesWeather(cities: City[]) {
   const queries = cities?.map(async (city) => {
     return weatherRequest
-      .get<WeatherResponse>("/current", {
+      .get<WeatherResponse | WeatherAPIError>("/current", {
         params: {
           query: `${city.latitude},${city.longitude}`,
         },
       })
-      .then((response) => response.data);
+      .then((response) => {
+        if ("error" in response.data) {
+          throw new Error(response.data.error.info);
+        }
+        return response.data;
+      });
   });
 
   return useQuery(
@@ -55,9 +60,10 @@ export function useGetCitiesWeather(cities: City[]) {
     async () => {
       const citiesWeather = await Promise.all(queries);
 
-      return citiesWeather.map((weather, index) => {
-        const coords = weather.location.lat + "," + weather.location.lon;
+      console.log({ citiesWeather });
 
+      return citiesWeather.map((weather, index) => {
+        const coords = weather?.location?.lat + "," + weather?.location?.lon;
         const cityWeather: CityWeatherResponse = {
           ...weather,
           coordinates: coords,
@@ -70,6 +76,7 @@ export function useGetCitiesWeather(cities: City[]) {
     {
       enabled: Boolean(cities?.length),
       select: (response) => {
+        console.log({ response });
         return response.sort((a: CityWeatherResponse, b: CityWeatherResponse) =>
           a.location.name < b.location.name ? -1 : 1
         );

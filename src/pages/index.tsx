@@ -17,7 +17,7 @@ export default function Home() {
   const [locationReqIsOpen, setLocationReqIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const { data: cities } = useGetCities();
-  const { data, isLoading, isError } = useGetCitiesWeather(cities);
+  const { data, isLoading, isError, error } = useGetCitiesWeather(cities);
 
   const handleFavorite = (city: CityWeatherResponse) => {
     dispatch({
@@ -58,7 +58,7 @@ export default function Home() {
       {isLoading ? (
         "Loading..."
       ) : isError ? (
-        "errored"
+        <p>Errored: {error.message}</p>
       ) : (
         <>
           <section className="mt-6">
