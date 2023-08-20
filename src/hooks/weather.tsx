@@ -10,19 +10,19 @@ import {
 } from "../types";
 
 export const queryKeys = {
-  cityWeather: (cityName: string) => [cityName, "weather_details"],
+  cityWeather: (cityQuery: string) => [cityQuery, "weather_details"],
   citiesWeatherDetails: () => ["cities_weather_details"],
 };
 
-export function useGetCityWeather(cityName: string) {
+export function useGetCityWeather(cityQuery: string) {
   return useQuery(
-    queryKeys.cityWeather(cityName),
+    queryKeys.cityWeather(cityQuery),
     async () => {
       const cityWeatherDet = await weatherRequest.get<
         CityWeatherResponse | WeatherAPIError
       >("/current", {
         params: {
-          query: cityName,
+          query: cityQuery,
         },
       });
       if ("error" in cityWeatherDet.data) {

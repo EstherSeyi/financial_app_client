@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import SearchCity from "./SearchCity";
 import ThemeToggle from "./ThemeToggle";
 
@@ -12,6 +12,9 @@ const Layout = () => {
           location.pathname === "/" ? "max-w-2xl" : ""
         }`}
       >
+        <Link className="underline" to="/">
+          Home
+        </Link>
         <ThemeToggle />
         <SearchCity />
         <Outlet />
