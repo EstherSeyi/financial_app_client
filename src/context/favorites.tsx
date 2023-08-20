@@ -1,9 +1,9 @@
 import { Dispatch, createContext, useReducer } from "react";
 import { favoriteReducer, getFavorites } from "../helpers/favorites";
-import { CityWeatherResponse2, FavoriteAction } from "../types";
+import { CityWeatherResponse, FavoriteAction } from "../types";
 
 export const FavoritesContext = createContext<{
-  favorites: CityWeatherResponse2[];
+  favorites: CityWeatherResponse[];
   dispatch: Dispatch<FavoriteAction>;
 } | null>(null);
 

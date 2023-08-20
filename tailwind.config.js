@@ -10,6 +10,8 @@ export default {
         bgBlue: "#0b131e",
         highlightBlue: "#0561a5",
         midBlue: "#202b3b",
+        textBright: "#dde0e4",
+        primary: "#9399a2",
       },
       backgroundImage: {
         custom_02: "url(../sunny.png)",

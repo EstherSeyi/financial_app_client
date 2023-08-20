@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 
-import { weatherRequest2 } from "../utils/requests";
+import { weatherRequest } from "../utils/requests";
 import {
   WeatherAPIError,
-  City2,
-  WeatherResponse2,
-  CityWeatherResponse2,
+  City,
+  WeatherResponse,
+  CityWeatherResponse,
 } from "../types";
 
 type Coord = {
@@ -28,8 +28,8 @@ export function useGetCityWeather(cityCord: Coord, unit: string) {
   return useQuery(
     queryKeys.cityWeather(cityCord, unit),
     async () => {
-      const cityWeatherDet = await weatherRequest2.get<
-        CityWeatherResponse2 | WeatherAPIError
+      const cityWeatherDet = await weatherRequest.get<
+        CityWeatherResponse | WeatherAPIError
       >("/weather", {
         params: {
           lat: cityCord?.lat,
@@ -44,16 +44,16 @@ export function useGetCityWeather(cityCord: Coord, unit: string) {
       return cityWeatherDet;
     },
     {
-      select: (response) => response.data as CityWeatherResponse2,
+      select: (response) => response.data as CityWeatherResponse,
       staleTime: 3600000,
     }
   );
 }
 
-export function useGetCitiesWeather(cities: City2[], unit: string) {
+export function useGetCitiesWeather(cities: City[], unit: string) {
   const queries = cities?.map(async (city) => {
-    return weatherRequest2
-      .get<WeatherResponse2 | WeatherAPIError>("/weather", {
+    return weatherRequest
+      .get<WeatherResponse | WeatherAPIError>("/weather", {
         params: {
           lat: city?.fields?.latitude,
           lon: city?.fields?.longitude,
@@ -76,7 +76,7 @@ export function useGetCitiesWeather(cities: City2[], unit: string) {
     async () => {
       const citiesWeather = await Promise.all(queries);
       return citiesWeather.map((weather, index) => {
-        const cityWeather: CityWeatherResponse2 = {
+        const cityWeather: CityWeatherResponse = {
           ...weather,
           population: cities[index]?.fields.population ?? 0,
           geoname_id: cities[index]?.fields.geoname_id ?? "",
@@ -88,12 +88,11 @@ export function useGetCitiesWeather(cities: City2[], unit: string) {
     {
       enabled: Boolean(cities?.length),
       select: (response) => {
-        return response.sort(
-          (a: CityWeatherResponse2, b: CityWeatherResponse2) =>
-            a?.name < b.name ? -1 : 1
+        return response.sort((a: CityWeatherResponse, b: CityWeatherResponse) =>
+          a?.name < b.name ? -1 : 1
         );
       },
       staleTime: 3600000,
     }
-  ) as UseQueryResult<CityWeatherResponse2[], AxiosError<WeatherAPIError>>;
+  ) as UseQueryResult<CityWeatherResponse[], AxiosError<WeatherAPIError>>;
 }

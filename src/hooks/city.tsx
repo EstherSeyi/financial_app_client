@@ -1,8 +1,8 @@
 import { AxiosError } from "axios";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 
-import { cityRequest2 } from "../utils/requests";
-import { City2 } from "../types";
+import { cityRequest } from "../utils/requests";
+import { City } from "../types";
 
 export const queryKeys = {
   cities: () => ["cities"] as const,
@@ -17,7 +17,7 @@ export function useGetCities() {
   return useQuery(
     queryKeys.cities(),
     () =>
-      cityRequest2.get("/search", {
+      cityRequest.get("/search", {
         params: {
           rows: 15,
           sort: "population",
@@ -36,7 +36,7 @@ export const useSearchCityByName = (cityName: string) => {
   return useQuery(
     queryKeys.searchCityByName(cityName),
     () =>
-      cityRequest2.get("/search", {
+      cityRequest.get("/search", {
         params: {
           rows: 15,
           q: cityName,
@@ -49,13 +49,13 @@ export const useSearchCityByName = (cityName: string) => {
       },
       staleTime: 3600000,
     }
-  ) as UseQueryResult<City2[], AxiosError>;
+  ) as UseQueryResult<City[], AxiosError>;
 };
 export const useGetSingleCity = (cityQuery: string) => {
   return useQuery(
     queryKeys.searchSingleCity(cityQuery),
     () =>
-      cityRequest2.get("/search", {
+      cityRequest.get("/search", {
         params: {
           q: cityQuery,
         },
@@ -65,5 +65,5 @@ export const useGetSingleCity = (cityQuery: string) => {
       select: (response) => response.data.records,
       staleTime: 3600000,
     }
-  ) as UseQueryResult<City2[], AxiosError>;
+  ) as UseQueryResult<City[], AxiosError>;
 };

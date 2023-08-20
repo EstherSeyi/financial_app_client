@@ -3,13 +3,6 @@ import axios from "axios";
 const source = axios.CancelToken.source();
 
 export const cityRequest = axios.create({
-  baseURL: import.meta.env.VITE_NINJAS_BASE_URL,
-  cancelToken: source.token,
-  headers: {
-    "X-Api-Key": import.meta.env.VITE_API_NINJAS_KEY,
-  },
-});
-export const cityRequest2 = axios.create({
   baseURL: import.meta.env.VITE_CITY_BASE_URL,
   cancelToken: source.token,
   params: {
@@ -18,13 +11,6 @@ export const cityRequest2 = axios.create({
 });
 
 export const weatherRequest = axios.create({
-  baseURL: import.meta.env.VITE_WEATHERSTACK_BASE_URL,
-  cancelToken: source.token,
-  params: {
-    access_key: import.meta.env.VITE_WEATHERSTACK_API_KEY,
-  },
-});
-export const weatherRequest2 = axios.create({
   baseURL: import.meta.env.VITE_OPEN_WEATHER_BASE_URL,
   cancelToken: source.token,
   params: {

@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon } from "lucide-react";
 import { useSearchCityByName } from "../hooks/city";
-import { City2 } from "../types";
+import { City } from "../types";
 
 const SearchCity = () => {
-  const [selected, setSelected] = useState<City2 | null>(null);
+  const [selected, setSelected] = useState<City | null>(null);
   const [query, setQuery] = useState("");
   const { data, isLoading, isError } = useSearchCityByName(query);
   const navigate = useNavigate();
 
-  const handleSelect = (selected: City2) => {
+  const handleSelect = (selected: City) => {
     setSelected(selected);
     navigate(
       `/${selected?.fields?.name}?lat=${selected?.fields?.latitude}&lon=${selected?.fields?.longitude}&geoname_id=${selected?.fields?.geoname_id}`
@@ -27,7 +27,7 @@ const SearchCity = () => {
             <Combobox.Input
               placeholder="Search By City Name..."
               className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-highlightBlue"
-              displayValue={(city: City2) => city?.fields?.name}
+              displayValue={(city: City) => city?.fields?.name}
               onChange={(event) => setQuery(event.target.value)}
             />
           </div>
@@ -38,7 +38,7 @@ const SearchCity = () => {
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-[#202b3b] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border border-highlightBlue z-[1]">
+            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-midBlue py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border border-highlightBlue z-[1]">
               {isLoading ? (
                 <div>Loading...</div>
               ) : isError ? (
@@ -54,9 +54,7 @@ const SearchCity = () => {
                     key={city.fields.geoname_id}
                     className={({ active }) =>
                       `relative cursor-default select-none py-4 pl-10 pr-4 ${
-                        active
-                          ? "bg-highlightBlue text-white"
-                          : "text-[#9399a2]"
+                        active ? "bg-highlightBlue text-white" : "text-primary"
                       }`
                     }
                     value={city}

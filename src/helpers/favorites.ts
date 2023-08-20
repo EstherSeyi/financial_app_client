@@ -1,8 +1,4 @@
-import {
-  FavoriteAction,
-  CityWeatherResponse2,
-  WeatherResponse2,
-} from "../types";
+import { FavoriteAction, CityWeatherResponse, WeatherResponse } from "../types";
 
 export const getFavorites = () => {
   const favString = localStorage.getItem("favorites");
@@ -10,23 +6,23 @@ export const getFavorites = () => {
 };
 
 export const getGroupedFavoriteCityWeather = (
-  favoriteCitiesWeather: WeatherResponse2[]
+  favoriteCitiesWeather: WeatherResponse[]
 ) =>
   favoriteCitiesWeather.reduce((acca, city) => {
     const coords = city?.coord.lat + "," + city.coord.lon;
     acca[coords] = city;
     return acca;
-  }, {} as Record<string, WeatherResponse2>);
+  }, {} as Record<string, WeatherResponse>);
 
-const sortFavorites = (favorites: CityWeatherResponse2[]) => {
-  return favorites.sort((a: CityWeatherResponse2, b: CityWeatherResponse2) =>
+const sortFavorites = (favorites: CityWeatherResponse[]) => {
+  return favorites.sort((a: CityWeatherResponse, b: CityWeatherResponse) =>
     a?.name < b?.name ? -1 : 1
   );
 };
 
 export const isAFavorite = (
-  favorites: CityWeatherResponse2[],
-  city: CityWeatherResponse2
+  favorites: CityWeatherResponse[],
+  city: CityWeatherResponse
 ) => {
   const groupedFavorites = getGroupedFavoriteCityWeather(favorites);
   const cityCoord = city?.coord.lat + "," + city.coord.lon;
@@ -34,8 +30,8 @@ export const isAFavorite = (
 };
 
 const toggleFavorite = (
-  state: CityWeatherResponse2[],
-  payload: CityWeatherResponse2
+  state: CityWeatherResponse[],
+  payload: CityWeatherResponse
 ) => {
   let favorites;
   if (!isAFavorite(state, payload)) {
@@ -49,8 +45,8 @@ const toggleFavorite = (
 };
 
 const removeFavorite = (
-  state: CityWeatherResponse2[],
-  payload: CityWeatherResponse2
+  state: CityWeatherResponse[],
+  payload: CityWeatherResponse
 ) => {
   if (isAFavorite(state, payload)) {
     const favorites = state.filter((city) => city.id !== payload.id);
@@ -62,14 +58,14 @@ const removeFavorite = (
 };
 
 export const favoriteReducer = (
-  state: CityWeatherResponse2[],
+  state: CityWeatherResponse[],
   { type, payload }: FavoriteAction
 ) => {
   switch (type) {
     case "TOGGLE_FAVORITE":
-      return toggleFavorite(state, payload as CityWeatherResponse2);
+      return toggleFavorite(state, payload as CityWeatherResponse);
     case "REMOVE_FAVORITE":
-      return removeFavorite(state, payload as CityWeatherResponse2);
+      return removeFavorite(state, payload as CityWeatherResponse);
     default:
       return state;
   }

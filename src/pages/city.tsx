@@ -27,7 +27,6 @@ function useURLQuery() {
 }
 
 export default function CityDetails() {
-  // const params = useParams();
   const [note, setNote] = useState(initialNote);
   const [notesToDelete, setNotesToDelete] = useState<Note[] | []>([]);
 
@@ -36,7 +35,6 @@ export default function CityDetails() {
   const urlQuery = useURLQuery();
 
   const geonameId = urlQuery.get("geoname_id") as string;
-  // &geoname_id=${city.geoname_id}
 
   const { data: singleCityData } = useGetSingleCity(geonameId as string);
   const singleCity = useMemo(
@@ -143,7 +141,7 @@ export default function CityDetails() {
       <div className="flex-1 md:mr-8 md:self-start">
         <div className="flex justify-between mb-6">
           <div>
-            <h1 className="flex items-center gap-2 text-4xl text-[#dde0e4] mb-0 font-medium">
+            <h1 className="flex items-center gap-2 text-4xl text-textBright mb-0 font-medium">
               {data?.name}
 
               <button onClick={handleFavorite}>
@@ -155,11 +153,11 @@ export default function CityDetails() {
                 />
               </button>
             </h1>
-            <h2 className="mb-2 text-[#dde0e4]">{singleCity?.country}</h2>
-            <p className="text-[#9399a2] font-light">
+            <h2 className="mb-2 text-textBright">{singleCity?.country}</h2>
+            <p className="text-primary font-light">
               {data?.weather[0]?.description}
             </p>
-            <p className="text-5xl font-semibold mt-8 text-[#dde0e4]">
+            <p className="text-5xl font-semibold mt-8 text-textBright">
               {data?.main?.temp}
               <span className="ml-1">°</span>
             </p>
@@ -178,13 +176,20 @@ export default function CityDetails() {
           </div>
         </div>
 
-        <div className="bg-[#202b3b] p-4 rounded-xl mb-6 md:mb-0 md:pb-8">
-          {/* <p className="mb-4">
-            <span className="mr-1 font-light">Observation Time:</span>{" "}
-            <span className=" text-[#c4cad3]">{data?.timezone}</span>
-          </p> */}
+        <div className="bg-midBlue p-4 rounded-xl mb-6 md:mb-0 md:pb-8">
+          {data?.dt && (
+            <p className="mb-4">
+              <span className="mr-1 font-light">Last Update:</span>{" "}
+              <span className=" text-[#c4cad3]">
+                {new Intl.DateTimeFormat("en-US", {
+                  dateStyle: "medium",
+                  timeStyle: "short",
+                }).format(data?.dt * 1000)}
+              </span>
+            </p>
+          )}
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
+          <div className="grid justify-center  sm:grid-cols-2 lg:grid-cols-3 gap-12">
             <DetailBox
               value={data?.main?.feels_like}
               unit="°"
@@ -193,14 +198,14 @@ export default function CityDetails() {
             />
             <DetailBox
               value={data?.wind?.speed}
-              unit="m/sec"
+              unit={unit === "metric" ? "m/sec" : "miles/hr"}
               label="Wind Speed"
               icon={WindIcon}
             />
 
             <DetailBox
-              value={data?.visibility}
-              unit="m"
+              value={data?.visibility ? data?.visibility / 1000 : 0}
+              unit="km"
               label="Visibility"
               icon={SunIcon}
             />
@@ -229,7 +234,7 @@ export default function CityDetails() {
         </div>
       </div>
 
-      <div className="basis-5/12 lg:basis-4/12 bg-[#202b3b] p-4 rounded-xl md:self-start">
+      <div className="basis-5/12 lg:basis-4/12 bg-midBlue p-4 rounded-xl md:self-start">
         <form onSubmit={handleSaveNotes}>
           <textarea
             value={note.text}

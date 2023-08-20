@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useGetCities } from "../hooks/city";
 import CityItem from "../components/CityItem";
-import { CityWeatherResponse2 } from "../types";
+import { CityWeatherResponse } from "../types";
 import {
   queryKeys as weatherKeys,
   useGetCitiesWeather,
@@ -21,17 +21,17 @@ export default function Home() {
   const { unit } = useUnit();
   const { data, isLoading, isError, error } = useGetCitiesWeather(cities, unit);
 
-  const handleFavorite = (city: CityWeatherResponse2) => {
+  const handleFavorite = (city: CityWeatherResponse) => {
     dispatch({
       type: "TOGGLE_FAVORITE",
       payload: city,
     });
   };
 
-  const handleDeleteCity = (city: CityWeatherResponse2) => {
+  const handleDeleteCity = (city: CityWeatherResponse) => {
     queryClient.setQueryData(
       weatherKeys.citiesWeatherDetails(unit),
-      (oldData?: CityWeatherResponse2[]) => {
+      (oldData?: CityWeatherResponse[]) => {
         return oldData?.filter((weather) => weather.id !== city.id);
       }
     );
@@ -66,7 +66,7 @@ export default function Home() {
               <h2 className="font-bold text-sm mb-2 ">FAVORITES</h2>
               {favorites.length ? (
                 <div>
-                  {favorites?.map((city: CityWeatherResponse2) => (
+                  {favorites?.map((city: CityWeatherResponse) => (
                     <CityItem
                       key={city.id}
                       city={city}
@@ -89,7 +89,7 @@ export default function Home() {
               <h2 className="font-bold text-sm mb-2">OTHERS</h2>
               {data.length ? (
                 <div>
-                  {data?.map((city: CityWeatherResponse2) => (
+                  {data?.map((city: CityWeatherResponse) => (
                     <CityItem
                       key={city.id}
                       city={city}
