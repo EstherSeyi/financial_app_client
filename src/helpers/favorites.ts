@@ -3,6 +3,7 @@ import {
   CityWeatherResponse2,
   WeatherResponse2,
 } from "../types";
+import { celsiusToFahrenheit, fahrenheitToCelsius } from "../utils/format";
 
 export const getFavorites = () => {
   const favString = localStorage.getItem("favorites");
@@ -61,15 +62,40 @@ const removeFavorite = (
   return state;
 };
 
+const updateFavoriteTempUnit = (
+  state: CityWeatherResponse2[],
+  unit: string
+) => {
+  console.log({ state, unit });
+  const updatedFaves = state?.map((item: CityWeatherResponse2) => {
+    item.main.temp =
+      unit === "metric"
+        ? fahrenheitToCelsius(item.main.temp)
+        : unit === "imperial"
+        ? celsiusToFahrenheit(item.main.temp)
+        : item.main.temp;
+    return item;
+  });
+
+  localStorage.setItem(
+    "favorites",
+    JSON.stringify(sortFavorites(updatedFaves))
+  );
+  // return sortFavorites(updatedFaves);
+  return state;
+};
+
 export const favoriteReducer = (
   state: CityWeatherResponse2[],
   { type, payload }: FavoriteAction
 ) => {
   switch (type) {
     case "TOGGLE_FAVORITE":
-      return toggleFavorite(state, payload);
+      return toggleFavorite(state, payload as CityWeatherResponse2);
     case "REMOVE_FAVORITE":
-      return removeFavorite(state, payload);
+      return removeFavorite(state, payload as CityWeatherResponse2);
+    case "UPDATE_FAVORITE_TEMP_UNIT":
+      return updateFavoriteTempUnit(state, payload as string);
     default:
       return state;
   }

@@ -125,6 +125,7 @@ export type CityWeatherResponse = WeatherResponse & {
 };
 export type CityWeatherResponse2 = WeatherResponse2 & {
   population: number;
+  geoname_id: string;
 };
 
 export type WeatherAPIError = {
@@ -144,7 +145,7 @@ export type CityListItemType = {
 
 export type FavoriteAction = {
   type: string;
-  payload: CityWeatherResponse2;
+  payload: CityWeatherResponse2 | string;
 };
 
 export type Note = {

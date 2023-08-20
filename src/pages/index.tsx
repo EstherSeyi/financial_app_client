@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useGetCities } from "../hooks/city";
@@ -8,16 +8,18 @@ import {
   queryKeys as weatherKeys,
   useGetCitiesWeather,
 } from "../hooks/weather";
-import { favoriteReducer, getFavorites } from "../helpers/favorites";
 import UserLocationModal from "../components/UserLocationModal";
 import { getGeoLocationPermission } from "../helpers/location";
+import { useUnit } from "../hooks/unit";
+import { useFavorites } from "../hooks/favorites";
 
 export default function Home() {
-  const [favorites, dispatch] = useReducer(favoriteReducer, getFavorites());
+  const { favorites, dispatch } = useFavorites();
   const [locationReqIsOpen, setLocationReqIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const { data: cities } = useGetCities();
-  const { data, isLoading, isError, error } = useGetCitiesWeather(cities);
+  const { unit } = useUnit();
+  const { data, isLoading, isError, error } = useGetCitiesWeather(cities, unit);
 
   const handleFavorite = (city: CityWeatherResponse2) => {
     dispatch({
@@ -28,7 +30,7 @@ export default function Home() {
 
   const handleDeleteCity = (city: CityWeatherResponse2) => {
     queryClient.setQueryData(
-      weatherKeys.citiesWeatherDetails(),
+      weatherKeys.citiesWeatherDetails(unit),
       (oldData?: CityWeatherResponse2[]) => {
         return oldData?.filter((weather) => weather.id !== city.id);
       }
@@ -87,7 +89,7 @@ export default function Home() {
               <h2 className="font-bold text-sm mb-2">OTHERS</h2>
               {data.length ? (
                 <div>
-                  {data.map((city: CityWeatherResponse2) => (
+                  {data?.map((city: CityWeatherResponse2) => (
                     <CityItem
                       key={city.id}
                       city={city}

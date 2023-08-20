@@ -22,3 +22,17 @@ export const formatCoord = (
 ) => {
   return lat && lon ? `${lat},${lon}` : null;
 };
+
+// export const celsiusToFahrenheit = (celsius: number) => (celsius * 9) / 5 + 32;
+
+// export const fahrenheitToCelsius = (fahrenheit: number) => {
+//   // ((fTemp - 32) * 5) / 9;
+
+//   return (fahrenheit - 32) / 1.8;
+// };
+
+export const celsiusToFahrenheit = (celsius: number) =>
+  Number((celsius * (9 / 5) + 32).toFixed(2));
+
+export const fahrenheitToCelsius = (fahrenheit: number) =>
+  Number(((fahrenheit - 32) * (5 / 9)).toFixed(2));

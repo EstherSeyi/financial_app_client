@@ -21,8 +21,6 @@ const CityItem = ({
     [city.id, getFavorites()?.length]
   );
 
-  // https://openweathermap.org/img/wn/10d@2x.png
-
   return (
     <div className="block mb-4 border-2 border-highlightBlue hover:bg-transparent focus:bg-transparent transition-all py-4 px-6 rounded-2xl bg-[#202b3b]">
       <div className="flex flex-wrap">
@@ -43,7 +41,7 @@ const CityItem = ({
               <Link
                 to={`/${city?.name.toLocaleLowerCase()}?lat=${
                   city?.coord?.lat
-                }&lon=${city?.coord?.lon}`}
+                }&lon=${city?.coord?.lon}&geoname_id=${city.geoname_id}`}
                 className="font-semibold text-3xl text-[#dde0e4ff] mb-1 hover:underline"
               >
                 {city?.name}

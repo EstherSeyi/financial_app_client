@@ -1,6 +1,8 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import SearchCity from "./SearchCity";
-import ThemeToggle from "./ThemeToggle";
+import UnitToggle from "./UnitToggle";
+import UnitProvider from "../context/unit";
+import FavoritesProvider from "../context/favorites";
 
 const Layout = () => {
   const location = useLocation();
@@ -15,9 +17,13 @@ const Layout = () => {
         <Link className="underline" to="/">
           Home
         </Link>
-        <ThemeToggle />
-        <SearchCity />
-        <Outlet />
+        <FavoritesProvider>
+          <UnitProvider>
+            <UnitToggle />
+            <SearchCity />
+            <Outlet />
+          </UnitProvider>
+        </FavoritesProvider>
       </div>
     </main>
   );

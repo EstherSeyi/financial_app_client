@@ -13,13 +13,11 @@ import {
   Star,
 } from "lucide-react";
 import DetailBox from "../components/WeatherItemDetail";
-import {
-  favoriteReducer,
-  getFavorites,
-  isAFavorite,
-} from "../helpers/favorites";
+import { getFavorites, isAFavorite } from "../helpers/favorites";
 import { formatCoord } from "../utils/format";
 import { useGetSingleCity } from "../hooks/city";
+import { useUnit } from "../hooks/unit";
+import { useFavorites } from "../hooks/favorites";
 
 const initialNote = { text: "", createdAt: "", coord: "" };
 function useURLQuery() {
@@ -33,7 +31,7 @@ export default function CityDetails() {
   const [notesToDelete, setNotesToDelete] = useState<Note[] | []>([]);
 
   const [allNotes, dispatch] = useReducer(notesReducer, getAllNotes());
-  const [, favoriteDispatch] = useReducer(favoriteReducer, getFavorites());
+  const { dispatch: favoriteDispatch } = useFavorites();
   const urlQuery = useURLQuery();
 
   const geonameId = urlQuery.get("geoname_id") as string;
@@ -44,11 +42,15 @@ export default function CityDetails() {
     () => singleCityData && singleCityData[0]?.fields,
     [singleCityData]
   );
+  const { unit } = useUnit();
 
-  const { data, isLoading, isError } = useGetCityWeather({
-    lat: urlQuery.get("lat"),
-    lon: urlQuery.get("lon"),
-  });
+  const { data, isLoading, isError } = useGetCityWeather(
+    {
+      lat: urlQuery.get("lat"),
+      lon: urlQuery.get("lon"),
+    },
+    unit
+  );
 
   const isFav = useMemo(
     () => {
