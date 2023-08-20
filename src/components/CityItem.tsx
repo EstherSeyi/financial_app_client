@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { StarIcon, TrashIcon } from "lucide-react";
 
-import { CityWeatherResponse2 } from "../types/index";
+import { CityWeatherResponse } from "../types/index";
 import { getFavorites, isAFavorite } from "../helpers/favorites";
 import { formatNumber } from "../utils/format";
 import { useGetCityWeather } from "../hooks/weather";
@@ -13,9 +13,9 @@ const CityItem = ({
   handleFavorite,
   handleDeleteCity,
 }: {
-  city: CityWeatherResponse2;
-  handleFavorite: (city: CityWeatherResponse2) => void;
-  handleDeleteCity: (city: CityWeatherResponse2) => void;
+  city: CityWeatherResponse;
+  handleFavorite: (city: CityWeatherResponse) => void;
+  handleDeleteCity: (city: CityWeatherResponse) => void;
 }) => {
   const isFav = useMemo(
     () => isAFavorite(getFavorites(), city),
@@ -33,7 +33,7 @@ const CityItem = ({
   );
 
   return (
-    <div className="block mb-4 border-2 border-highlightBlue hover:bg-transparent focus:bg-transparent transition-all py-4 px-6 rounded-2xl bg-[#202b3b]">
+    <div className="block mb-4 border-2 border-highlightBlue hover:bg-transparent focus:bg-transparent transition-all py-4 px-6 rounded-2xl bg-midBlue">
       <div className="flex flex-wrap">
         {city?.weather?.length && (
           <div className="mr-6">
@@ -53,7 +53,7 @@ const CityItem = ({
                 to={`/${city?.name.toLocaleLowerCase()}?lat=${
                   city?.coord?.lat
                 }&lon=${city?.coord?.lon}&geoname_id=${city.geoname_id}`}
-                className="font-semibold text-3xl text-[#dde0e4ff] mb-1 hover:underline"
+                className="font-semibold text-3xl text-textBright mb-1 hover:underline"
               >
                 {city?.name}
               </Link>
@@ -69,14 +69,22 @@ const CityItem = ({
             </button>
           </div>
           <div className="flex flex-col justify-between">
-            <button className="self-end" onClick={() => handleFavorite(data!)}>
+            <button
+              className="self-end"
+              onClick={() =>
+                handleFavorite({
+                  ...data,
+                  population: city.population,
+                } as CityWeatherResponse)
+              }
+            >
               <StarIcon
                 className={`w-8 h-8 ${
                   isFav ? "text-yellow-300 fill-yellow-300" : ""
                 }`}
               />
             </button>
-            <p className="text-[#dde0e4ff] text-3xl font-light">
+            <p className="text-textBright text-3xl font-light">
               {data?.main?.temp}°
             </p>
           </div>
