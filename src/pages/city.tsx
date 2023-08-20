@@ -1,4 +1,4 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { ChangeEvent, useMemo, useReducer, useState } from "react";
 import { useGetCityWeather } from "../hooks/weather";
 import { getAllNotes, notesReducer } from "../helpers/notes";
@@ -28,7 +28,7 @@ function useURLQuery() {
 }
 
 export default function CityDetails() {
-  const params = useParams();
+  // const params = useParams();
   const [note, setNote] = useState(initialNote);
   const [notesToDelete, setNotesToDelete] = useState<Note[] | []>([]);
 
@@ -36,7 +36,10 @@ export default function CityDetails() {
   const [, favoriteDispatch] = useReducer(favoriteReducer, getFavorites());
   const urlQuery = useURLQuery();
 
-  const { data: singleCityData } = useGetSingleCity(params.cityId as string);
+  const geonameId = urlQuery.get("geoname_id") as string;
+  // &geoname_id=${city.geoname_id}
+
+  const { data: singleCityData } = useGetSingleCity(geonameId as string);
   const singleCity = useMemo(
     () => singleCityData && singleCityData[0]?.fields,
     [singleCityData]
@@ -70,7 +73,11 @@ export default function CityDetails() {
         singleCity?.population
           ? {
               type: "TOGGLE_FAVORITE",
-              payload: { ...data, population: singleCity?.population },
+              payload: {
+                ...data,
+                geoname_id: geonameId,
+                population: singleCity?.population,
+              },
             }
           : {
               type: "TOGGLE_FAVORITE",
@@ -155,7 +162,7 @@ export default function CityDetails() {
             </p>
           </div>
           <div className="self-start">
-            {data.weather.map((item) => (
+            {data.weather?.map((item) => (
               <div key={item.id}>
                 <img
                   // src={icon}
@@ -173,7 +180,9 @@ export default function CityDetails() {
           <p className="mb-4">
             <span className="mr-1 font-light">Observation Time:</span>{" "}
             <span className=" text-[#c4cad3]">
-              {/* {data.current.observation_time} */}
+              {new Intl.DateTimeFormat("en-US", {
+                dateStyle: "full",
+              }).format(data?.dt)}
             </span>
           </p>
 
@@ -186,7 +195,7 @@ export default function CityDetails() {
             />
             <DetailBox
               value={data?.wind?.speed}
-              unit="km/hr"
+              unit={unit === "metric" ? "mtr/sec" : "miles/hour"}
               label="Wind Speed"
               icon={WindIcon}
             />
@@ -261,7 +270,7 @@ export default function CityDetails() {
           </div>
           {notes && notes.length ? (
             <>
-              {notes.map((item) => (
+              {notes?.map((item) => (
                 <li
                   key={item.createdAt}
                   className="border-b border-[#31445b] mb-4 flex"

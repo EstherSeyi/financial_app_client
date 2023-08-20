@@ -14,7 +14,7 @@ const SearchCity = () => {
   const handleSelect = (selected: City2) => {
     setSelected(selected);
     navigate(
-      `/${selected?.fields?.name}?lat=${selected?.fields?.latitude}&lon=${selected?.fields?.longitude}`
+      `/${selected?.fields?.name}?lat=${selected?.fields?.latitude}&lon=${selected?.fields?.longitude}&geoname_id=${selected?.fields?.geoname_id}`
     );
     setSelected(null);
   };
@@ -50,7 +50,8 @@ const SearchCity = () => {
               ) : (
                 data.map((city) => (
                   <Combobox.Option
-                    key={`${city?.fields?.latitude},${city?.fields?.longitude}`}
+                    // key={`${city?.fields?.latitude},${city?.fields?.longitude}`}
+                    key={city.fields.geoname_id}
                     className={({ active }) =>
                       `relative cursor-default select-none py-4 pl-10 pr-4 ${
                         active

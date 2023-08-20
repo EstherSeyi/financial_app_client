@@ -76,6 +76,7 @@ export function useGetCitiesWeather(cities: City2[]) {
         const cityWeather: CityWeatherResponse2 = {
           ...weather,
           population: cities[index]?.fields.population ?? 0,
+          geoname_id: cities[index]?.fields.geoname_id ?? "",
         };
 
         return cityWeather;

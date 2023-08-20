@@ -7,8 +7,8 @@ import { City2 } from "../types";
 export const queryKeys = {
   cities: () => ["cities"] as const,
   searchCityByName: (cityName: string) => [cityName, "city_search"] as const,
-  searchSingleCity: (cityName: string) =>
-    [cityName, "single_city_search"] as const,
+  searchSingleCity: (cityQuery: string) =>
+    [cityQuery, "single_city_search"] as const,
   searchCityByCoord: (cityCoord: string) =>
     [cityCoord, "city_coord_search"] as const,
 };
@@ -51,17 +51,17 @@ export const useSearchCityByName = (cityName: string) => {
     }
   ) as UseQueryResult<City2[], AxiosError>;
 };
-export const useGetSingleCity = (cityName: string) => {
+export const useGetSingleCity = (cityQuery: string) => {
   return useQuery(
-    queryKeys.searchSingleCity(cityName),
+    queryKeys.searchSingleCity(cityQuery),
     () =>
       cityRequest2.get("/search", {
         params: {
-          q: cityName,
+          q: cityQuery,
         },
       }),
     {
-      enabled: Boolean(cityName),
+      enabled: Boolean(cityQuery),
       select: (response) => response.data.records,
       staleTime: 3600000,
     }
