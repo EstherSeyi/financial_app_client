@@ -1,0 +1,414 @@
+[
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "d210ab247bc1dca4dfdfd54196ed4d2a63f73bb9",
+    "fields": {
+      "coordinates": [31.22222, 121.45806],
+      "latitude": "31.22222",
+      "timezone": "Asia/Shanghai",
+      "ascii_name": "Shanghai",
+      "longitude": "121.45806",
+      "dem": 12,
+      "feature_code": "PPLA",
+      "geoname_id": "1796236",
+      "population": 22315474,
+      "modification_date": "2021-09-20",
+      "alternate_names": "SHA,San'nkae,Sanchajus,Sangaj,Sangay,Sanghaj,Sanghay,Sanhaja,Sanhajo,Sanxay,Schanghai,Shang-hai,Shang-hai-shih,Shangai,Shangaj,Shanghai,Shanghai - shang hai,Shanghai - 上海,Shankhaj,Sjanghae,Sjanghai,Sjanghæ,Szanghaj,Thuong Hai,Thượng Hải,Xangai,cankay,sangha'i,sanghae,sanghai,seiynghi,shang hai,shang hai shi,shanghay,shanghhay,shanhai,zhong guo shang hai,Ŝanhajo,Şangay,Şanghay,Şanxay,Šanchajus,Šangaj,Šanghaj,Šanhaja,Σανγκάη,Шангај,Шанхай,שאנגחאי,شانغهاي,شانگهای,شاڭخەي,شاڭخەي شەھىرى,সাংঘাই,சாங்காய்,เซี่ยงไฮ้,შანჰაი,上海,上海市,中国上海,상하이,상해",
+      "country_code": "CN",
+      "admin2_code": "12324204",
+      "name": "Shanghai",
+      "country": "China",
+      "feature_class": "P",
+      "admin1_code": "23"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [121.45806, 31.22222]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "34613150f9a3358d455a3c9ec59600a507d31203",
+    "fields": {
+      "coordinates": [39.9075, 116.39723],
+      "latitude": "39.9075",
+      "timezone": "Asia/Shanghai",
+      "ascii_name": "Beijing",
+      "longitude": "116.39723",
+      "dem": 49,
+      "feature_code": "PPLC",
+      "geoname_id": "1816670",
+      "population": 18960744,
+      "modification_date": "2022-03-07",
+      "alternate_names": "BJS,Bac Kinh,Baek-ging,Baekging,Behehzhin,Beijing,Beijing Shi,Beising,Beixin,Beixín,Bejdzing,Bejdżing,Bejing,Beyjing,Beȝcinȝ,Báe̤k-gĭng,Béising,Bắc Kinh,Pechin,Pechino,Pechinu,Pechinum,Pecinum,Pei-ching,Pei-ching-shih,Pei-p'ing,Pei-p'ing-shih,Peken,Pekin,Pekin',Pekina,Pekinas,Peking,Pekini,Pekino,Pekín,Pekîn,Peping,Pequim,Pequin,Pequín,Pet-kin,Pet-kîn,Peycing,Pikkin,Pèquin,Pékin,Péqùin,Péycing,be'ijim,be'ijina,be'ijinga,bei jing,bei jing shi,beidjin,beijing,bijiga,bijing,bijinga,bkyn,buggyeong,byjng,bykyn,byyg'yng,byyzsyng,pakking,peyjin,pkn,Πεκίνο,Бейжің,Бээжин,Бәәҗң балһсн,Пекин,Пекинг,Пекін,Пекінґ,Պեկին,בייג'ינג,בייזשינג,بكين,بيكين,بیجنگ,بېجینګ,بېيجىڭ,بېيجىڭ شەھىرى,پکن,پێکەن,ބީޖިންގ,बीजिंग,बेइजिङ,বেইজিং,ਬੀਜਿੰਗ,બેઇજિંગ,பெய்ஜிங்,బీజింగ్,ಬೀಜಿಂಗ್,ബെയ്‌ജിങ്ങ്‌,බෙයිජිං,ปักกิ่ง,པེ་ཅིང་གྲོང་ཁྱེར།,ပေကျင်းမြို့,პეკინი,ቤዪጂንግ,ប៉េកាំង,北京,北京市,베이징,북경",
+      "country_code": "CN",
+      "admin2_code": "11876380",
+      "name": "Beijing",
+      "country": "China",
+      "feature_class": "P",
+      "admin1_code": "22"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [116.39723, 39.9075]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "5a6dc18227b9646cb2d297919b5da7554f6a5d31",
+    "fields": {
+      "coordinates": [22.54554, 114.0683],
+      "latitude": "22.54554",
+      "timezone": "Asia/Shanghai",
+      "ascii_name": "Shenzhen",
+      "longitude": "114.0683",
+      "dem": 4,
+      "feature_code": "PPLA2",
+      "geoname_id": "1795565",
+      "population": 17494398,
+      "modification_date": "2022-03-09",
+      "alternate_names": "Bao'an,Chhum-chun-su,Chhṳ̂m-chun-sṳ,Pao-an,Pao-an-hsien,SZX,Sen-cen,Sencsen,Sendzenas,Senjeno,Senzen,Sham Chun Hu,Shehn'chzhehn',Shen'chzhen',Shen-ch'uan,Shen-ch'uan-chen,Shen-ch'uan-hsu,Shen-ch'üan,Shen-ch'üan-chen,Shen-ch'üan-hsü,Shen-chen,Shen-chun,Shendzen,Shenzhen,Shiem Chun,Shumchun,Shumchün,Shundzhun,Tham Quyen,Thâm Quyến,Tschhimtschun,cenccen,sainazaina,sein cein,senacena,sencena,senjhena,seonjeon si,shen zhen,shen zhen shi,shensen shi,shynzhyn,shynzyn,simcheon,sng'n,Ŝenĵeno,Šen-čen,Šendženas,Šenžen,Шеньчжень,Шенџен,Шънджън,Шэньчжэнь,שנג'ן,شن‌ژن,شينزين,شینژین,شېنجېن شەھىرى,शेन्झेन,षेंचेन,শেনচেন,ਸ਼ੈਨਜ਼ੈਨ,சென்ச்சென்,షెన్‌జెన్,เซินเจิ้น,深セン市,深圳,深圳市,선전 시,심천",
+      "country_code": "CN",
+      "admin2_code": "4403",
+      "name": "Shenzhen",
+      "country": "China",
+      "feature_class": "P",
+      "admin1_code": "30"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [114.0683, 22.54554]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "4595a0c904733fc469ed264652a2c02bf5edc817",
+    "fields": {
+      "coordinates": [23.11667, 113.25],
+      "latitude": "23.11667",
+      "timezone": "Asia/Shanghai",
+      "ascii_name": "Guangzhou",
+      "longitude": "113.25",
+      "dem": 15,
+      "feature_code": "PPLA",
+      "geoname_id": "1809858",
+      "population": 16096724,
+      "modification_date": "2022-03-09",
+      "alternate_names": "CAN,Cantao,Canton,Cantão,Cantón,Fan-yu,Fan-yü,Guanchjou,Guanchzhou,Guanczou,Guand'ou,Guandzhou,Guandzou,Guandžou,Guangdzou,Guangdzov,Guangdžou,Guangdžov,Guangjow,Guangsu,Guangzhou,Guangzhou Shi,Guanzhou,Guančžou,Guaңҗu,Guong-ciu,Guōng-ciŭ,Gvangjcouh,Kanton,Kantono,Kng-chiu-chhi,Kong-chu-su,Kouan'nktsoou,Kouang-chou,Kuang-chou,Kuang-chou-shih,Kwang-chowfu,Kwangchow,Kwangtsjou,Kóng-chû-sṳ,Kńg-chiu-chhī,P'an-yu,Puyun,Puyün,P’an-yü,Quancheum,Quancjou,Quang Chau,Quançjou,Quảng Châu,Shengcheng,ghwanzw,gu'angazu,guang zhou,guang zhou shi,guanjou,guyanjho,gvangajho'u,gvanjea,gwangjeou,gwangjeou si,gwangzhw,gwʼnggwʼw,kantwn,kuvanco,kvangacau,kwang cow,shynyang,Κουανγκτσόου,Гуангџоу,Гуанджоу,Гуандьоу,Гуанжоу,Гуанчжоу,Гуанчжоў,Гуаңҗу,Кантон,Գուանչժոու,גואנגגואו,شینیانگ,غوانزو,کانتون,گوانگژو,گوانگ‌ژو,گۇاڭجۇ شەھىرى,क्वांगचौ,ग्वांगझोउ,গুয়ংঝো,ਗੁਆਂਗਜ਼ੂ,குவாங்சோ,ഗ്വാങ്ജോ,กว่างโจว,ກວ່າງໂຈວ,ཀོང་ཀྲོའུ་གྲོང་ཁྱེར།,ကွမ်ကျိုးမြို့,გუანჯოუ,广州,广州市,広州,広州市,廣州,廣州市,광저우,광저우 시",
+      "country_code": "CN",
+      "admin2_code": "4401",
+      "name": "Guangzhou",
+      "country": "China",
+      "feature_class": "P",
+      "admin1_code": "30"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [113.25, 23.11667]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "fbd0b50cd2ae781100bd6e151bd1b8047c506b70",
+    "fields": {
+      "coordinates": [6.45407, 3.39467],
+      "latitude": "6.45407",
+      "timezone": "Africa/Lagos",
+      "ascii_name": "Lagos",
+      "longitude": "3.39467",
+      "dem": 11,
+      "feature_code": "PPLA2",
+      "geoname_id": "2332459",
+      "population": 15388000,
+      "modification_date": "2022-04-01",
+      "alternate_names": "Eko,LOS,Lacupolis,Lagas,Lagos,Lagos shaary,Lagosa,Lagosas,Lagoso,Laguosos,Laqos,Logos,la ge si,lageas,laghws,lagos,lagosa,lagoseu,lagosi,laguseu,lagws,lajws,lakos,legosa,lek xs,ragosu,Èkó,Λάγος,Лагас,Лагос,Лагос шаары,Лаґос,Լագոս,לאגאס,לאגוס,لاجوس,لاغوس,لاگوس,لاگۆس,लागोस,লেগোস,ਲਾਗੋਸ,લાગોસ,லாகோஸ்,లాగోస్,ಲಾಗೊಸ್,ലാഗോസ്,เลกอส,လေးဂို့စ်မြို့,ლაგოსი,ሌጎስ,ラゴス,拉哥斯,라고스,라구스",
+      "country_code": "NG",
+      "name": "Lagos",
+      "country": "Nigeria",
+      "feature_class": "P",
+      "admin1_code": "05"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [3.39467, 6.45407]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "1440c763be54a5ef17192b3442a4126eb4b0070f",
+    "fields": {
+      "coordinates": [41.01384, 28.94966],
+      "latitude": "41.01384",
+      "timezone": "Europe/Istanbul",
+      "ascii_name": "Istanbul",
+      "longitude": "28.94966",
+      "dem": 39,
+      "feature_code": "PPLA",
+      "geoname_id": "745044",
+      "population": 14804116,
+      "modification_date": "2022-03-09",
+      "alternate_names": "Bizanc,Bizánc,Byzance,Byzantion,Byzantium,Byzanz,Constantinoble,Constantinopla,Constantinople,Constantinopolen,Constantinopoli,Constantinopolis,Costantinopoli,Estambul,IST,Istamboul,Istambul,Istambuł,Istampoul,Istanbul,Istanbúl,Isztambul,Konstantinapoly,Konstantinopel,Konstantinopolo,Konstantinoupoli,Konstantinoupolis,Konstantinápoly,Kustantiniyah,Micklagard,Micklagård,Mikligardur,Mikligarður,Stamboul,Stambul,Stambula,Stambuł,Tsarigrad,Vizantija (Vizantija),Vyzantio,astnbwl,bijantium,byuzantion,byzntywn,iseutanbul,istambula,isutanburu,stin Poli [stimˈboli],yi si tan bao,yi si tan bu er,İstanbul,Βυζάντιο,Βυζαντιο,Ισταμπουλ,Ισταμπούλ,Κωνσταντινουπολη,Κωνσταντινούπολη,Κωνσταντινούπολις,στην Πόλι [stimˈboli],Византија (Vizantija),Истанбул,Стамбул,ביזנטיון,اسطنبول,इस्तांबुल,ইস্তাম্বুল,イスタンブール,ビュザンティオン,伊斯坦堡,伊斯坦布尔,비잔티움,이스탄불",
+      "country_code": "TR",
+      "name": "Istanbul",
+      "country": "Turkey",
+      "feature_class": "P",
+      "admin1_code": "34"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [28.94966, 41.01384]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "8787be6df84be0fec40ca987b5e766754ee9a2aa",
+    "fields": {
+      "coordinates": [30.66667, 104.06667],
+      "latitude": "30.66667",
+      "timezone": "Asia/Shanghai",
+      "ascii_name": "Chengdu",
+      "longitude": "104.06667",
+      "dem": 499,
+      "feature_code": "PPLA",
+      "geoname_id": "1815286",
+      "population": 13568357,
+      "modification_date": "2021-12-13",
+      "alternate_names": "CTU,Ccheng-tu,Cendu,Cengdu,Cengduo,Ch'eng-tu,Ch'eng-tu-hsien,Ch'eng-tu-shih,Chehndu,Chendu,Chengdu,Chengdu Shi,Chengdú,Chundu,Chөndү,Ch’eng-tu,Ch’eng-tu-hsien,Ch’eng-tu-shih,Csengtu,Cwngzduh,Hua-yang,Sang-tu-su,Seng-to-chhi,Sing-du,Sàng-tû-sṳ,Sêng-to͘-chhī,Sìng-dŭ,Thanh Do,Thành Đô,Tsen'nkntou,Txengdu,cengadu,centu,chantu,cheing tu,cheng dou,cheng dou shi,cheongdu si,chngdw,chyngdw,chېngdۇ shەھyr,tshnghdw,zngdw,Çengdu,Ĉengduo,Čcheng-tu,Čendu,Čengdu,Τσενγκντού,Ченгду,Ченду,Чънду,Чыңду,Чэнду,Чөндү,Չենդու,צנגדו,تشنغدو,چنگدو,چینگدو,چېڭدۇ شەھىر,चेंगदू,छंतू,ਚੇਂਗਦੂ,செங்டூ,เฉิงตู,ချင်းဒူမြို့,成都,成都市,청두 시",
+      "country_code": "CN",
+      "admin2_code": "5101",
+      "name": "Chengdu",
+      "country": "China",
+      "feature_class": "P",
+      "admin1_code": "32"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [104.06667, 30.66667]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "3fc1d615c6bb7840046cf22161c6d319d4c377e3",
+    "fields": {
+      "coordinates": [19.07283, 72.88261],
+      "latitude": "19.07283",
+      "timezone": "Asia/Kolkata",
+      "ascii_name": "Mumbai",
+      "longitude": "72.88261",
+      "dem": 8,
+      "feature_code": "PPLA",
+      "geoname_id": "1275339",
+      "population": 12691836,
+      "modification_date": "2023-06-01",
+      "alternate_names": "Asumumbay,BOM,Bombai,Bombaim,Bombaj,Bombay,Bombaya,Bombej,Bombejus,Bombėjus,Bumbaj,Bůmbaj,Dakbayan sa Bombay,Lungsod ng Mumbai,Moembaai,Mumbai,Mumbai - मुम़बई,Mumbaj,Mumbaja,Mumbajo,Mumbajus,Mumbay,Mumbaî,Numbai,Vomvai,bamba'i,bmbyy,bwmbay,gretara mumba'i,meng mai,mmbay,mmbyy,mu0bai,muba'i,mum bi,mumba'i,mumbai,mumpai,munbai,mwmbay,mwmbyy,mymbais,pullapa mumba'i,Βομβάη,Бомбай,Бомбей,Мумбаи,Мумбай,Мумбаі,Мумбаї,Мумбај,Մումբայ,מומבאי,מומביי,بمبئی,بومباي,بَمبَے,ممبئي,ممبئی,ممبای,مومباى,مومباي,مومبای,މުންބާއީ,ग्रेटर मुम्बई,बम्बई,मुंबई,मुम्बई,পুল্লাপ মুম্বাই,মুম্বই,মুম্বাই,ਮੁੰਬਈ,મુંબઈ,ମୁମ୍ବାଇ,மும்பை,ముంబై,ಮುಂಬೈ,ಮು೦ಬೈ,മുംബൈ,มุมไบ,འབོམ་སྦེ,မွမ်ဘိုင်းမြို့,მუმბაი,ムンバイ,孟买,孟買,뭄바이",
+      "country_code": "IN",
+      "name": "Mumbai",
+      "country": "India",
+      "feature_class": "P",
+      "admin1_code": "16"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [72.88261, 19.07283]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "5465d04451d1c2d5a96d7277c2970191c0acf5f9",
+    "fields": {
+      "coordinates": [-23.5475, -46.63611],
+      "latitude": "-23.5475",
+      "timezone": "America/Sao_Paulo",
+      "ascii_name": "Sao Paulo",
+      "longitude": "-46.63611",
+      "dem": 769,
+      "feature_code": "PPLA",
+      "geoname_id": "3448439",
+      "population": 12400232,
+      "modification_date": "2023-05-31",
+      "alternate_names": "SAO,Sampa,San Paolo,San Paul ed Brasil,San Paulas,San Paulo,San Paulu,San Paulu du Brasili,San Paulu dû Brasili,San Pauluw,San Pawlo,San Polo del Braxil,San Poulo,San Poło del Braxil,San Pàul ëd Brasil,San-Paulo,San-Paulu,San-Paŭlo,Sanpaulu,Sao Paolo,Sao Paulo,Sao Paulo capital,Saun Paulu,Sawo Palo,Sawo Pålo,São Paolo,São Paulo,São Paulo capital,Urbs Paulistana,cavo pavulo,sa'o pa'ulo,sa'o paulo,samu pa'ulu,sangpaollo,sangpaollu,sangpaullo,sangpaullu,sankt. paulos,sanpauro,savea pealea,savo palo,saw bawlw,saw palw,saw pwlw,saywpaywlw,sea pea lu,sheng bao luo,Σάο Πάολο,Сан Пауло,Сан Паулу,Сан-Паулу,Сан-Паўлу,Сао Паоло,Сао Пауло,Սան Պաուլու,סאו פאולא,סאו פאולו,ساؤ پالو,ساؤ پولو,سائوپائولو,ساو باولو,ܣܐܘ ܦܐܘܠܘ,ސައޮ ޕައުލޯ,साओ पाउलो,সাঁউ পাউলু,সাও পাউলো,சாவோ பாவுலோ,శఒ పౌలొ,ಸಾವೊ ಪಾಲೊ,സാവോ പോളോ,เซาเปาลู,ဆောပိုလိုမြို့,სან-პაულუ,ሳው ፓውሉ,サンパウロ,聖保羅,상파올로,상파올루,상파울로,상파울루",
+      "country_code": "BR",
+      "name": "São Paulo",
+      "country": "Brazil",
+      "feature_class": "P",
+      "admin1_code": "27"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-46.63611, -23.5475]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "582693013b7d3f938209b71e2cabe94cf32dcdd9",
+    "fields": {
+      "coordinates": [19.42847, -99.12766],
+      "latitude": "19.42847",
+      "timezone": "America/Mexico_City",
+      "ascii_name": "Mexico City",
+      "longitude": "-99.12766",
+      "dem": 2240,
+      "feature_code": "PPLC",
+      "geoname_id": "3530597",
+      "population": 12294193,
+      "modification_date": "2021-07-25",
+      "alternate_names": "Cdmx,Cidade de Mexico,Cidade de México,Cidade do Mexico,Cidade do México,Cita du Messicu,Citta del Messico,Città del Messico,Cità dû Messicu,Cità dû Mèssicu,Ciudad Mexico,Ciudad de Mejico,Ciudad de Mexico,Ciudad de Méjico,Ciudad de México,Ciutat de Mexic,Ciutat de Mèxic,Lungsod ng Mexico,Lungsod ng México,MEX,Mehiko,Mekhiko,Meksikas,Meksiko,Meksiko Siti,Meksikurbo,Meksyk,Mexico,Mexico City,Mexico D.F.,Mexico DF,Mexico Distrito Federal,Mexico by,Mexico-stad,Mexicopolis,Mexiko,Mexiko Hiria,Mexiko-Stadt,Mexikoborg,Mexíkóborg,México,México Distrito Federal,Nkoyo,Pole tou Mexikou,Valle de Mexico,Valle de México,mdynt mksykw,megsiko si,megsikositi,mekishikoshiti,meksiko,meksiko siti,meksikositi,mkzykw,mkzykwsyty,mo xi ge cheng,mqsyqw syty,Πόλη του Μεξικού,Мексико,Мексико Сити,Мехико,Мехіко,מקסיקו סיטי,مدينة مكسيكو,مکزیکو,مکزیکوسیتی,مېكسىكا شەھىرى,मेक्सिको सिटी,মেক্সিকো,เม็กซิโกซิตี,მეხიკო,メキシコシティ,墨西哥城,멕시코 시,멕시코시티",
+      "country_code": "MX",
+      "name": "Mexico City",
+      "country": "Mexico",
+      "feature_class": "P",
+      "admin1_code": "09"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [-99.12766, 19.42847]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "b42d2b9eb5d34db09f79c73fe29ef6a71072594e",
+    "fields": {
+      "coordinates": [24.8608, 67.0104],
+      "latitude": "24.8608",
+      "timezone": "Asia/Karachi",
+      "ascii_name": "Karachi",
+      "longitude": "67.0104",
+      "dem": 8,
+      "feature_code": "PPLA",
+      "geoname_id": "1174872",
+      "population": 11624219,
+      "modification_date": "2022-03-07",
+      "alternate_names": "Carachi,KHI,Karaaji,Karaces,Karachi,Karachi - krachy,Karachi - كراچى,Karachy,Karaci,Karacio,Karacis,Karacsi,Karaczi,Karanchi,Karasi,Karatschi,Karatsi,Karatsji,Karatxi,Karaçi,Karaĉio,Karači,Karačis,Karačės,Karochi,Karáči,Karáčí,Karâchi,Karāchi,Karāči,Keraci,Keraçî,Kurrachee,Kurrachi,Kəraçi,ka la qi,ka ra ci,kalachi,karaaci,karacci,karachi,karachy,karaci,karatshy,ke la chi,krachy,kratshy,pechs,qrʼzy,Καράτσι,Карачи,Карачы,Карачі,Կարաչի,קאראטשי,קראצי,كاراتشى,كاراچى,كراتشي,کراچی,کراچۍ,کَرٲچی,کەراچی,ڪراچي,ކަރާޗީ,कराची,করাচী,কৰাচী,ਕਰਾਚੀ,કરાચી,କରାଚୀ,கராச்சி,కరాచీ,ಕರಾಚಿ,കറാച്ചി,การาจี,ཀ་ར་ཆི,ကရာချိမြို့,კარაჩი,ከራቺ,カラチ,カラーチー,卡拉奇,喀拉蚩,카라치",
+      "country_code": "PK",
+      "name": "Karachi",
+      "country": "Pakistan",
+      "feature_class": "P",
+      "admin1_code": "05"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [67.0104, 24.8608]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "12ca5626ef11db8f6c6334075d6d229e7571ddf7",
+    "fields": {
+      "coordinates": [39.14222, 117.17667],
+      "latitude": "39.14222",
+      "timezone": "Asia/Shanghai",
+      "ascii_name": "Tianjin",
+      "longitude": "117.17667",
+      "dem": 11,
+      "feature_code": "PPLA",
+      "geoname_id": "1792947",
+      "population": 11090314,
+      "modification_date": "2021-09-20",
+      "alternate_names": "T'ien-chin,T'ien-ching,T'ien-ching-shih,TSN,Tchien-tin,Tchien-ťin,Tehnd'iin,Thien Tan,Thien-tsin,Thiên Tân,Thiên-tsîn,Tiandzinas,Tianjin,Tianjin Shi,Tianjing,Tianjín,Tiantzin,Tiencin,Tiencsin,Tiendzin,Tientsin,Tiençin,Tjan'czin',Tjandzina,Tjangino,Tjanĝino,Tjaņdziņa,Tjencin,Tyantszin,T’ien-chin,T’ien-ching,T’ien-ching-shih,cheonjin,theiyn cin,ti'anjina,tian jin,tian jin shi,tiyanjin,tyanjina,tyanjn,tyanjyn,tyenjin si,tyyng'yn,Τιαντζίν,Тиендзин,Тэндьиин,Тяньцзинь,Тяньцзінь,Тјенцин,טיינג'ין,تيانجين,تيەنجىن شەھىرى,تیانجن,تیانجین,तिआंजिन,त्यांजिन,ਤਿਆਂਜਿਨ,தியான்ஜின்,ടിയാൻജിൻ,เทียนจิน,ཐན་ཅིན ་གྲོང་ཁྱེར།,ထျန်းကျင်းမြို့,ტიანძინი,天津,天津市,천진,톈진 시",
+      "country_code": "CN",
+      "admin2_code": "12324202",
+      "name": "Tianjin",
+      "country": "China",
+      "feature_class": "P",
+      "admin1_code": "28"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [117.17667, 39.14222]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "2811bf46baddaa232353c077f603a6870761332b",
+    "fields": {
+      "coordinates": [28.65195, 77.23149],
+      "latitude": "28.65195",
+      "timezone": "Asia/Kolkata",
+      "ascii_name": "Delhi",
+      "longitude": "77.23149",
+      "dem": 227,
+      "feature_code": "PPLA",
+      "geoname_id": "1273294",
+      "population": 10927986,
+      "modification_date": "2022-03-09",
+      "alternate_names": "DEL,Daehli,Dehli,Dehlī,Delchi,Delhi,Delhio,Delhí,Delhî,Deli,Delis,Delkhi,Dellium,Delí,Dilhi,Dilli,Dillí,Dillī,Dähli,Déhli,Faritani Delhi,New Delhi,Old Delhi,Sahdzahanabad,Stare Deli,de li,dehali,deli,delli,deri,dhilli,dhly,dhly qdym,dil'hi,dili,dilli,dlhy,dly,dlھy,dylhy,na'i dilli,prany dہly,tilli,Šáhdžahanabád,Δελχί,Дели,Делхи,Делі,Деҳли,Дэлі,Старе Делі,Դելի,דלהי,דעלהי,دلهي,دلھی,دلی,دهلي,دهلی قدیم,ديلهى,دہلی,دێھلی,پرانی دہلی,ډېلي,ދިއްލީ,दिल्ली,देहली,नई दिल्ली,দিল্লি,দিল্লী,ਦਿੱਲੀ,દિલ્હી,ଦିଲ୍ଲୀ,தில்லி,ఢిల్లీ,ದೆಹಲಿ,ഡെൽഹി,เดลี,დელი,デリー,德里,델리",
+      "country_code": "IN",
+      "name": "Delhi",
+      "country": "India",
+      "feature_class": "P",
+      "admin1_code": "07"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [77.23149, 28.65195]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "804b80c8df2a0ee741445fc9bcfe126168ba2571",
+    "fields": {
+      "coordinates": [30.58333, 114.26667],
+      "latitude": "30.58333",
+      "timezone": "Asia/Shanghai",
+      "ascii_name": "Wuhan",
+      "longitude": "114.26667",
+      "dem": 20,
+      "feature_code": "PPLA",
+      "geoname_id": "1791247",
+      "population": 10392693,
+      "modification_date": "2021-12-13",
+      "alternate_names": "Bu-han-chhi,Bú-hàn-chhī,Gouchan,Owhan,U-hang,Uhan,Uhana,Uhanas,Uhaņa,Ukhan,Ukhan',Uxan,Vu Han,Vu-hon-su,Vuhan,Vuhani,Vuhano,Vujhan,Vukhan,Vú-hon-sṳ,Vũ Hán,WUH,Wu-chan,Wu-han-shih,Wuhan,Wuhan Shi,uhan si,ukhani,uuxan,vuhana,vukan,vukhana,wu han,wu han shi,wwhan,xu han,Ū-háng,Γουχάν,Вухан,Вухан балһсн,Ухан,Ухань,Үkhan',Үхань,Үһән,Ուհան,ווהאן,ووهان,ووھان,ووہان,ۋۇخەن شەھىرى,ܘܘܗܐܢ,वूहान,ਵੂਖ਼ਨ,வுகான்,വൂഹാൻ,อู่ฮั่น,ཝུའུ་ཧན་གྲོང་ཁྱེར།,ဝူဟန့်မြို့,უხანი,ዉሃን,武汉,武汉市,武漢,武漢市,우한 시,𐍅𐌿𐌷𐌰𐌽",
+      "country_code": "CN",
+      "admin2_code": "4201",
+      "name": "Wuhan",
+      "country": "China",
+      "feature_class": "P",
+      "admin1_code": "12"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [114.26667, 30.58333]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  },
+  {
+    "datasetid": "geonames-all-cities-with-a-population-500",
+    "recordid": "d24fdfa9c96a4f8ac5b2fbd4ceee04bb4c15367d",
+    "fields": {
+      "coordinates": [55.75222, 37.61556],
+      "latitude": "55.75222",
+      "timezone": "Europe/Moscow",
+      "ascii_name": "Moscow",
+      "longitude": "37.61556",
+      "dem": 144,
+      "feature_code": "PPLC",
+      "geoname_id": "524901",
+      "population": 10381222,
+      "modification_date": "2022-12-10",
+      "alternate_names": "MOW,Maeskuy,Maskav,Maskava,Maskva,Mat-xco-va,Matxcova,Matxcơva,Mosca,Moscfa,Moscha,Mosco,Moscou,Moscova,Moscovo,Moscow,Moscoƿ,Moscu,Moscua,Moscòu,Moscó,Moscù,Moscú,Moskva,Moska,Moskau,Mosko,Moskokh,Moskou,Moskov,Moskova,Moskovu,Moskow,Moskowa,Mosku,Moskuas,Moskva,Moskve,Moskvo,Moskvy,Moskwa,Moszkva,Muskav,Musko,Mát-xcơ-va,Mòskwa,Məskeu,Məskəү,masko,maskw,mo si ke,moseukeuba,mosko,mosukuwa,mskw,mwskva,mwskw,mwsqbh,mx s ko,Μόσχα,Мæскуы,Маскав,Масква,Москва,Москве,Москвы,Москова,Москох,Москъва,Мускав,Муско,Мәскеу,Мәскәү,Մոսկվա,מאָסקװע,מאסקווע,מוסקבה,ماسکو,مسکو,موسكو,موسكۋا,ܡܘܣܩܒܐ,मास्को,मॉस्को,মস্কো,மாஸ்கோ,มอสโก,མོ་སི་ཁོ།,მოსკოვი,ሞስኮ,モスクワ,莫斯科,모스크바",
+      "country_code": "RU",
+      "name": "Moscow",
+      "country": "Russia",
+      "feature_class": "P",
+      "admin1_code": "48"
+    },
+    "geometry": {
+      "type": "Point",
+      "coordinates": [37.61556, 55.75222]
+    },
+    "record_timestamp": "2023-08-10T06:00:01.704Z"
+  }
+]
