@@ -2,7 +2,6 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import SearchCity from "./SearchCity";
 import UnitToggle from "./UnitToggle";
 import UnitProvider from "../context/unit";
-import FavoritesProvider from "../context/favorites";
 import ErrorBoundary from "./ErrorBoundary";
 
 const Layout = () => {
@@ -18,15 +17,13 @@ const Layout = () => {
         <Link className="underline" to="/">
           Home
         </Link>
-        <FavoritesProvider>
-          <UnitProvider>
-            <UnitToggle />
-            <SearchCity />
-            <ErrorBoundary>
-              <Outlet />
-            </ErrorBoundary>
-          </UnitProvider>
-        </FavoritesProvider>
+        <UnitProvider>
+          <UnitToggle />
+          <SearchCity />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
+        </UnitProvider>
       </div>
     </main>
   );

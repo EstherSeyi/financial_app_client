@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useGetCities } from "../hooks/city";
@@ -11,10 +11,10 @@ import {
 import UserLocationModal from "../components/UserLocationModal";
 import { getGeoLocationPermission } from "../helpers/location";
 import { useUnit } from "../hooks/unit";
-import { useFavorites } from "../hooks/favorites";
+import { favoriteReducer, getFavorites } from "../helpers/favorites";
 
 export default function Home() {
-  const { favorites, dispatch } = useFavorites();
+  const [favorites, dispatch] = useReducer(favoriteReducer, getFavorites());
   const [locationReqIsOpen, setLocationReqIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const { data: cities } = useGetCities();

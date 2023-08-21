@@ -14,11 +14,14 @@ import {
   SunIcon,
 } from "lucide-react";
 import DetailBox from "../components/WeatherItemDetail";
-import { getFavorites, isAFavorite } from "../helpers/favorites";
+import {
+  favoriteReducer,
+  getFavorites,
+  isAFavorite,
+} from "../helpers/favorites";
 import { formatCoord } from "../utils/format";
 import { useGetSingleCity } from "../hooks/city";
 import { useUnit } from "../hooks/unit";
-import { useFavorites } from "../hooks/favorites";
 
 const initialNote = { text: "", createdAt: "", coord: "" };
 function useURLQuery() {
@@ -31,7 +34,7 @@ export default function CityDetails() {
   const [notesToDelete, setNotesToDelete] = useState<Note[] | []>([]);
 
   const [allNotes, dispatch] = useReducer(notesReducer, getAllNotes());
-  const { dispatch: favoriteDispatch } = useFavorites();
+  const [, favoriteDispatch] = useReducer(favoriteReducer, getFavorites());
   const urlQuery = useURLQuery();
 
   const geonameId = urlQuery.get("geoname_id") as string;
