@@ -14,7 +14,7 @@ export default function Home() {
   const [locationReqIsOpen, setLocationReqIsOpen] = useState(false);
   const queryClient = useQueryClient();
   const { unit } = useUnit();
-  const { data: cities, isLoading, isError, error } = useGetCities(unit);
+  const { data: cities, isLoading, isError } = useGetCities(unit);
 
   const handleFavorite = (city: City) => {
     dispatch({
@@ -52,7 +52,7 @@ export default function Home() {
       {isLoading ? (
         "Loading..."
       ) : isError ? (
-        <p>Errored: {error?.message}</p>
+        <p>Errored: Couldn't fetch Data, Please try refreshing page!</p>
       ) : (
         <>
           <section className="mt-6">
