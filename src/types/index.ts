@@ -2,7 +2,7 @@ import { LucideIcon } from "lucide-react";
 
 export type City = {
   datasetid: string;
-  recordid: "d210ab247bc1dca4dfdfd54196ed4d2a63f73bb9";
+  recordid: string;
   fields: {
     coordinates: number[];
     latitude: string;
@@ -61,8 +61,8 @@ export type WeatherResponse = {
   };
   dt: number;
   sys: {
-    type: number;
-    id: number;
+    type?: number;
+    id?: number;
     country: string;
     sunrise: number;
     sunset: number;

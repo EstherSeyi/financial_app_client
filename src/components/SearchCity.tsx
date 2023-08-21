@@ -40,7 +40,7 @@ const SearchCity = () => {
           >
             <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-midBlue py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border border-highlightBlue z-[1]">
               {isLoading ? (
-                <div>Loading...</div>
+                <div data-testid="loader">Loading...</div>
               ) : isError ? (
                 <div>Errored</div>
               ) : !data || data.length === 0 ? (
@@ -50,7 +50,6 @@ const SearchCity = () => {
               ) : (
                 data.map((city) => (
                   <Combobox.Option
-                    // key={`${city?.fields?.latitude},${city?.fields?.longitude}`}
                     key={city.fields.geoname_id}
                     className={({ active }) =>
                       `relative cursor-default select-none py-4 pl-10 pr-4 ${

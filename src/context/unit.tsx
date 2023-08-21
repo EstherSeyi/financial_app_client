@@ -4,11 +4,7 @@ export const UnitContext = createContext<{
   handleUnit: (newUnit: string) => void;
 } | null>(null);
 
-const UnitProvider = ({
-  children,
-}: {
-  children: JSX.Element | JSX.Element[];
-}) => {
+const UnitProvider = ({ children }: { children: React.ReactNode }) => {
   const [unit, setUnit] = useState(
     () => localStorage.getItem("app_unit") ?? "metric"
   );

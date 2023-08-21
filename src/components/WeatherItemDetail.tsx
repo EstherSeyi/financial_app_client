@@ -6,8 +6,10 @@ const DetailBox = ({ label, value, icon, unit }: DetailType) => {
     <div className="flex">
       <Icon className="w-5 h-5 mr-2 shrink-0" />
       <div>
-        <p className="font-light text-sm">{label}</p>
-        <p className="text-2xl font-medium text-[#c4cad3]">
+        <p data-testid="label" className="font-light text-sm">
+          {label}
+        </p>
+        <p data-testid="label" className="text-2xl font-medium text-[#c4cad3]">
           {value}
           {unit}
         </p>

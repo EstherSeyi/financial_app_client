@@ -65,7 +65,7 @@ const CityItem = ({
               className="text-sm self-start"
               onClick={() => handleDeleteCity(city)}
             >
-              <TrashIcon className="w-5 h-5" />
+              <TrashIcon data-testid="trash-icon" className="w-5 h-5" />
             </button>
           </div>
           <div className="flex flex-col justify-between">
@@ -79,6 +79,7 @@ const CityItem = ({
               }
             >
               <StarIcon
+                data-testid="star-icon"
                 className={`w-8 h-8 ${
                   isFav ? "text-yellow-300 fill-yellow-300" : ""
                 }`}

@@ -11,7 +11,7 @@ const UnitToggle = () => {
     <div className="mb-4">
       <div className="ml-auto w-fit">
         <p>Toggle Unit</p>
-        <select onChange={handleChange} value={unit}>
+        <select data-testid="unit_select" onChange={handleChange} value={unit}>
           <option value="metric">Celsius</option>
           <option value="imperial">Fahrenheit </option>
         </select>
