@@ -95,7 +95,7 @@ export type CityListItemType = {
 
 export type FavoriteAction = {
   type: string;
-  payload: CityWeatherResponse | string;
+  payload: City | string;
 };
 
 export type Note = {

@@ -1,13 +1,9 @@
 import { useState, useEffect, useReducer } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useGetCities } from "../hooks/city";
+import { useGetCities, queryKeys as cityKeys } from "../hooks/city";
 import CityItem from "../components/CityItem";
-import { CityWeatherResponse } from "../types";
-import {
-  queryKeys as weatherKeys,
-  useGetCitiesWeather,
-} from "../hooks/weather";
+import { City } from "../types";
 import UserLocationModal from "../components/UserLocationModal";
 import { getGeoLocationPermission } from "../helpers/location";
 import { useUnit } from "../hooks/unit";
@@ -17,24 +13,22 @@ export default function Home() {
   const [favorites, dispatch] = useReducer(favoriteReducer, getFavorites());
   const [locationReqIsOpen, setLocationReqIsOpen] = useState(false);
   const queryClient = useQueryClient();
-  const { data: cities } = useGetCities();
   const { unit } = useUnit();
-  const { data, isLoading, isError, error } = useGetCitiesWeather(cities, unit);
+  const { data: cities, isLoading, isError, error } = useGetCities(unit);
 
-  const handleFavorite = (city: CityWeatherResponse) => {
+  const handleFavorite = (city: City) => {
     dispatch({
       type: "TOGGLE_FAVORITE",
       payload: city,
     });
   };
 
-  const handleDeleteCity = (city: CityWeatherResponse) => {
-    queryClient.setQueryData(
-      weatherKeys.citiesWeatherDetails(unit),
-      (oldData?: CityWeatherResponse[]) => {
-        return oldData?.filter((weather) => weather.id !== city.id);
-      }
-    );
+  const handleDeleteCity = (city: City) => {
+    queryClient.setQueryData(cityKeys.cities(unit), (oldData?: City[]) => {
+      return oldData?.filter(
+        (item: City) => item?.fields?.geoname_id !== city?.fields?.geoname_id
+      );
+    });
     dispatch({
       type: "REMOVE_FAVORITE",
       payload: city,
@@ -58,7 +52,7 @@ export default function Home() {
       {isLoading ? (
         "Loading..."
       ) : isError ? (
-        <p>Errored: {error.message}</p>
+        <p>Errored: {error?.message}</p>
       ) : (
         <>
           <section className="mt-6">
@@ -66,9 +60,9 @@ export default function Home() {
               <h2 className="font-bold text-sm mb-2 ">FAVORITES</h2>
               {favorites.length ? (
                 <div>
-                  {favorites?.map((city: CityWeatherResponse) => (
+                  {favorites?.map((city: City) => (
                     <CityItem
-                      key={city.id}
+                      key={city.fields.geoname_id}
                       city={city}
                       handleFavorite={handleFavorite}
                       handleDeleteCity={handleDeleteCity}
@@ -87,11 +81,11 @@ export default function Home() {
           <section className="mt-6">
             <div>
               <h2 className="font-bold text-sm mb-2">OTHERS</h2>
-              {data.length ? (
+              {cities.length ? (
                 <div>
-                  {data?.map((city: CityWeatherResponse) => (
+                  {cities?.map((city: City) => (
                     <CityItem
-                      key={city.id}
+                      key={city.fields.geoname_id}
                       city={city}
                       handleFavorite={handleFavorite}
                       handleDeleteCity={handleDeleteCity}

@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { ChangeEvent, useMemo, useReducer, useState } from "react";
 import { useGetCityWeather } from "../hooks/weather";
 import { getAllNotes, notesReducer } from "../helpers/notes";
-import { Note } from "../types";
+import { City, Note } from "../types";
 import {
   Cloud,
   Trash2Icon,
@@ -51,15 +51,20 @@ export default function CityDetails() {
       lat: urlQuery.get("lat"),
       lon: urlQuery.get("lon"),
     },
-    unit
+    unit,
+    (singleCityData && singleCityData[0]?.fields?.geoname_id) ?? null
   );
 
   const isFav = useMemo(
     () => {
-      if (data) return isAFavorite(getFavorites(), data);
+      if (singleCityData?.length)
+        return isAFavorite(getFavorites(), singleCityData[0] as City);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data?.id, getFavorites()?.length]
+    [
+      singleCityData && singleCityData[0]?.fields?.geoname_id,
+      getFavorites()?.length,
+    ]
   );
 
   const coord = useMemo(
@@ -72,22 +77,11 @@ export default function CityDetails() {
   );
 
   const handleFavorite = () => {
-    if (data)
-      favoriteDispatch(
-        singleCity?.population
-          ? {
-              type: "TOGGLE_FAVORITE",
-              payload: {
-                ...data,
-                geoname_id: geonameId,
-                population: singleCity?.population,
-              },
-            }
-          : {
-              type: "TOGGLE_FAVORITE",
-              payload: data,
-            }
-      );
+    if (singleCityData?.length)
+      favoriteDispatch({
+        type: "TOGGLE_FAVORITE",
+        payload: singleCityData[0] as City,
+      });
   };
 
   const handleSaveNotes = (event: React.FormEvent<HTMLFormElement>) => {
