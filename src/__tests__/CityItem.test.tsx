@@ -4,50 +4,7 @@ import { CityWeatherResponse } from "../types";
 import { render, screen } from "../utils/test-utils";
 import CityItem from "../components/CityItem";
 import { formatNumber } from "../utils/format";
-
-const dummyCity = {
-  coord: {
-    lon: 3.3947,
-    lat: 6.4541,
-  },
-  weather: [
-    {
-      id: 500,
-      main: "Rain",
-      description: "light rain",
-      icon: "10d",
-    },
-  ],
-  base: "stations",
-  main: {
-    temp: 300.06,
-    feels_like: 302.6,
-    temp_min: 300.06,
-    temp_max: 300.06,
-    pressure: 1011,
-    humidity: 79,
-  },
-  visibility: 10000,
-  wind: {
-    speed: 5.51,
-    deg: 199,
-  },
-  clouds: {
-    all: 24,
-  },
-  dt: 1692531820,
-  sys: {
-    country: "NG",
-    sunrise: 1692510053,
-    sunset: 1692554357,
-  },
-  timezone: 3600,
-  id: 2332459,
-  name: "Lagos",
-  cod: 200,
-  population: 11624219,
-  geoname_id: "11624219",
-} as CityWeatherResponse;
+import dummyCity from "./setup/mock-city-data.json";
 
 const handleDeleteCity = vi.fn();
 const handleFavorite = vi.fn();
@@ -55,7 +12,7 @@ const handleFavorite = vi.fn();
 beforeEach(() => {
   render(
     <CityItem
-      city={dummyCity}
+      city={dummyCity as CityWeatherResponse}
       handleFavorite={handleFavorite}
       handleDeleteCity={handleDeleteCity}
     />
