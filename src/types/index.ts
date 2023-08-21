@@ -134,3 +134,7 @@ export type IPResponse = {
   region: string;
   timezone: string;
 };
+export type Coord = {
+  lat: string | null;
+  lon: string | null;
+};

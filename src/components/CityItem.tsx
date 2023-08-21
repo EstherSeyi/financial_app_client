@@ -39,6 +39,7 @@ const CityItem = ({
         {data?.weather?.length && (
           <div className="mr-6">
             <img
+              data-testid="weather-icon"
               src={`https://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`}
               alt={data?.weather[0]?.description}
               className="rounded-full"
@@ -72,7 +73,11 @@ const CityItem = ({
             </button>
           </div>
           <div className="flex flex-col justify-between">
-            <button className="self-end" onClick={() => handleFavorite(city)}>
+            <button
+              data-cy="fave-btn"
+              className="self-end"
+              onClick={() => handleFavorite(city)}
+            >
               <StarIcon
                 data-testid="star-icon"
                 className={`w-8 h-8 ${

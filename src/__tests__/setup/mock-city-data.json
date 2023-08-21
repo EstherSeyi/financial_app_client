@@ -1,43 +1,28 @@
 {
-  "coord": {
-    "lon": 3.3947,
-    "lat": 6.4541
+  "datasetid": "geonames-all-cities-with-a-population-500",
+  "recordid": "34613150f9a3358d455a3c9ec59600a507d31203",
+  "fields": {
+    "coordinates": [39.9075, 116.39723],
+    "latitude": "39.9075",
+    "timezone": "Asia/Shanghai",
+    "ascii_name": "Beijing",
+    "longitude": "116.39723",
+    "dem": 49,
+    "feature_code": "PPLC",
+    "geoname_id": "1816670",
+    "population": 18960744,
+    "modification_date": "2022-03-07",
+    "alternate_names": "BJS,Bac Kinh,Baek-ging,Baekging,Behehzhin,Beijing,Beijing Shi,Beising,Beixin,Beixín,Bejdzing,Bejdżing,Bejing,Beyjing,Beȝcinȝ,Báe̤k-gĭng,Béising,Bắc Kinh,Pechin,Pechino,Pechinu,Pechinum,Pecinum,Pei-ching,Pei-ching-shih,Pei-p'ing,Pei-p'ing-shih,Peken,Pekin,Pekin',Pekina,Pekinas,Peking,Pekini,Pekino,Pekín,Pekîn,Peping,Pequim,Pequin,Pequín,Pet-kin,Pet-kîn,Peycing,Pikkin,Pèquin,Pékin,Péqùin,Péycing,be'ijim,be'ijina,be'ijinga,bei jing,bei jing shi,beidjin,beijing,bijiga,bijing,bijinga,bkyn,buggyeong,byjng,bykyn,byyg'yng,byyzsyng,pakking,peyjin,pkn,Πεκίνο,Бейжің,Бээжин,Бәәҗң балһсн,Пекин,Пекинг,Пекін,Пекінґ,Պեկին,בייג'ינג,בייזשינג,بكين,بيكين,بیجنگ,بېجینګ,بېيجىڭ,بېيجىڭ شەھىرى,پکن,پێکەن,ބީޖިންގ,बीजिंग,बेइजिङ,বেইজিং,ਬੀਜਿੰਗ,બેઇજિંગ,பெய்ஜிங்,బీజింగ్,ಬೀಜಿಂಗ್,ബെയ്‌ജിങ്ങ്‌,බෙයිජිං,ปักกิ่ง,པེ་ཅིང་གྲོང་ཁྱེར།,ပေကျင်းမြို့,პეკინი,ቤዪጂንግ,ប៉េកាំង,北京,北京市,베이징,북경",
+    "country_code": "CN",
+    "admin2_code": "11876380",
+    "name": "Beijing",
+    "country": "China",
+    "feature_class": "P",
+    "admin1_code": "22"
   },
-  "weather": [
-    {
-      "id": 500,
-      "main": "Rain",
-      "description": "light rain",
-      "icon": "10d"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp": 300.06,
-    "feels_like": 302.6,
-    "temp_min": 300.06,
-    "temp_max": 300.06,
-    "pressure": 1011,
-    "humidity": 79
+  "geometry": {
+    "type": "Point",
+    "coordinates": [116.39723, 39.9075]
   },
-  "visibility": 10000,
-  "wind": {
-    "speed": 5.51,
-    "deg": 199
-  },
-  "clouds": {
-    "all": 24
-  },
-  "dt": 1692531820,
-  "sys": {
-    "country": "NG",
-    "sunrise": 1692510053,
-    "sunset": 1692554357
-  },
-  "timezone": 3600,
-  "id": 2332459,
-  "name": "Lagos",
-  "cod": 200,
-  "population": 11624219,
-  "geoname_id": "11624219"
+  "record_timestamp": "2023-08-10T06:00:01.704Z"
 }

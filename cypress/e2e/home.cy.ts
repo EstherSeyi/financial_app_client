@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 
-// import cities from "../fixtures/cities.json";
-import citiesWeather from "../fixtures/cities-weather.json";
+import cities from "../fixtures/cities.json";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { _ } = Cypress;
@@ -9,23 +8,31 @@ const { _ } = Cypress;
 describe("Home Page Test", () => {
   beforeEach(() => {
     cy.intercept("GET", "*/search*", {
-      fixture: "cities-weather.json",
+      fixture: "cities.json",
     }).as("getCities");
-    cy.intercept("GET", "*/weather**", {
-      fixture: "cities-weather.json",
-    }).as("getCitiesWeather");
 
     cy.visit("/");
   });
 
   it("renders all cities and their temp detail", () => {
-    cy.get('[data-cy="city-weather-list"]').within(() => {
-      _.each(citiesWeather, (cityWeather) => {
-        const cityName = cityWeather.name;
-        cy.get(`[data-cy="city-${cityWeather.id}"]`).contains(cityName, {
-          matchCase: false,
-        });
+    cy.get('[data-cy="cities-container"]').should("have.class", "mt-6");
+    cy.get('[data-cy="no-btn"]').click();
+    cy.get('[data-cy="cities-list"]').within(() => {
+      _.each(cities, (city) => {
+        cy.get(`[data-cy="city-${city?.fields?.name}"]`).contains(
+          city?.fields?.population
+        );
       });
     });
+  });
+  it("navigates to user's city page", () => {
+    cy.get('[data-cy="cities-container"]').should("have.class", "mt-6");
+    cy.get('[data-cy="okay-location-btn"]')
+      .click()
+      .then(() => {
+        cy.location().should((location) => {
+          expect(location.pathname).to.include("lat");
+        });
+      });
   });
 });

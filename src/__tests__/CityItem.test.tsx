@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 
-import { CityWeatherResponse } from "../types";
+import { City } from "../types";
 import { render, screen } from "../utils/test-utils";
 import CityItem from "../components/CityItem";
 import { formatNumber } from "../utils/format";
@@ -12,32 +12,19 @@ const handleFavorite = vi.fn();
 beforeEach(() => {
   render(
     <CityItem
-      city={dummyCity as CityWeatherResponse}
+      city={dummyCity as City}
       handleFavorite={handleFavorite}
       handleDeleteCity={handleDeleteCity}
     />
   );
 });
 describe("<CityItem/>", () => {
-  test("renders weather icon correctly", () => {
-    const weatherIcon = screen.queryByRole("img");
-    expect(weatherIcon).toHaveAttribute("src");
-    expect(weatherIcon).toHaveAttribute(
-      "src",
-      `https://openweathermap.org/img/wn/${dummyCity?.weather[0]?.icon}.png`
-    );
-    expect(weatherIcon).toHaveAttribute(
-      "alt",
-      dummyCity?.weather[0]?.description
-    );
-  });
-
   test("city name and link render properly", async () => {
     const cityNameLink = screen.getByRole("link");
-    expect(cityNameLink).toHaveTextContent(/lagos/i);
+    expect(cityNameLink).toHaveTextContent(/beijing/i);
     expect(cityNameLink).toHaveAttribute(
       "href",
-      `/lagos?lat=6.4541&lon=3.3947&geoname_id=11624219`
+      `/beijing?lat=39.9075&lon=116.39723&geoname_id=1816670`
     );
   });
 
@@ -48,7 +35,7 @@ describe("<CityItem/>", () => {
     const starIcon = screen.getByTestId("star-icon");
 
     expect(population).toHaveTextContent(
-      `Population est.: ${formatNumber(dummyCity.population)}`
+      `Population est.: ${formatNumber(dummyCity?.fields?.population)}`
     );
     expect(deleteBtn).toContainElement(trashIcon);
     expect(addToFaveBtn).toContainElement(starIcon);

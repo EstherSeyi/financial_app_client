@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { ChangeEvent, useMemo, useReducer, useState } from "react";
 import { useGetCityWeather } from "../hooks/weather";
 import { getAllNotes, notesReducer } from "../helpers/notes";
@@ -30,6 +30,7 @@ function useURLQuery() {
 }
 
 export default function CityDetails() {
+  const params = useParams();
   const [note, setNote] = useState(initialNote);
   const [notesToDelete, setNotesToDelete] = useState<Note[] | []>([]);
 
@@ -39,9 +40,13 @@ export default function CityDetails() {
 
   const geonameId = urlQuery.get("geoname_id") as string;
 
-  const { data: singleCityData } = useGetSingleCity(geonameId as string);
+  const { data: singleCityData } = useGetSingleCity(
+    (geonameId as string) ?? params?.cityId,
+    urlQuery.get("country_code")
+  );
+
   const singleCity = useMemo(
-    () => singleCityData && singleCityData[0]?.fields,
+    () => singleCityData && singleCityData?.fields,
     [singleCityData]
   );
   const { unit } = useUnit();
@@ -52,20 +57,14 @@ export default function CityDetails() {
       lon: urlQuery.get("lon"),
     },
     unit,
-    (singleCityData && singleCityData[0]?.fields?.geoname_id) ?? null
+    (singleCityData && singleCityData?.fields?.geoname_id) ?? null
   );
 
-  const isFav = useMemo(
-    () => {
-      if (singleCityData?.length)
-        return isAFavorite(getFavorites(), singleCityData[0] as City);
-    },
+  const isFav = useMemo(() => {
+    if (singleCityData)
+      return isAFavorite(getFavorites(), singleCityData as City);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      singleCityData && singleCityData[0]?.fields?.geoname_id,
-      getFavorites()?.length,
-    ]
-  );
+  }, [singleCityData?.fields?.geoname_id, getFavorites()?.length]);
 
   const coord = useMemo(
     () =>
@@ -77,10 +76,10 @@ export default function CityDetails() {
   );
 
   const handleFavorite = () => {
-    if (singleCityData?.length)
+    if (singleCityData)
       favoriteDispatch({
         type: "TOGGLE_FAVORITE",
-        payload: singleCityData[0] as City,
+        payload: singleCityData as City,
       });
   };
 

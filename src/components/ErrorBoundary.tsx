@@ -37,8 +37,7 @@ const AppErrorBoundary = ({
   return (
     <ErrorBoundary
       fallbackRender={fallbackRender}
-      onReset={async (details) => {
-        console.log({ details });
+      onReset={async () => {
         await queryClient.refetchQueries();
         localStorage.setItem("favorites", JSON.stringify([]));
         navigate("/");

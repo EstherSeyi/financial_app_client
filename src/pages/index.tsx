@@ -55,7 +55,7 @@ export default function Home() {
         <p>Errored: Couldn't fetch Data, Please try refreshing page!</p>
       ) : (
         <>
-          <section className="mt-6">
+          <section className="mt-6" data-cy="cities-container">
             <div>
               <h2 className="font-bold text-sm mb-2 ">FAVORITES</h2>
               {favorites.length ? (
@@ -82,9 +82,10 @@ export default function Home() {
             <div>
               <h2 className="font-bold text-sm mb-2">OTHERS</h2>
               {cities.length ? (
-                <div>
+                <div data-cy="cities-list">
                   {cities?.map((city: City) => (
                     <CityItem
+                      data-cy={`city-${city?.fields?.name}`}
                       key={city.fields.geoname_id}
                       city={city}
                       handleFavorite={handleFavorite}

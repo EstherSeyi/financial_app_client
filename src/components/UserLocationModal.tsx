@@ -27,8 +27,11 @@ export default function UserLocationModal({
   const handleRequestAcceptance = () => {
     mutate(undefined, {
       onSuccess(response) {
+        const [lat, lon] = response.loc.split(",");
         storeGeoLocationPermission("granted");
-        navigate(`/${response.city}`);
+        navigate(
+          `/${response.city}?lat=${lat}&lon=${lon}&country_code=${response.country}`
+        );
       },
     });
   };
@@ -76,6 +79,7 @@ export default function UserLocationModal({
 
                   <div className="mt-4">
                     <button
+                      data-cy="okay-location-btn"
                       type="button"
                       className="rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 mr-4"
                       onClick={handleRequestAcceptance}
@@ -83,6 +87,7 @@ export default function UserLocationModal({
                       Okay
                     </button>
                     <button
+                      data-cy="no-btn"
                       type="button"
                       className="rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={handleRequestDenial}

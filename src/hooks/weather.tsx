@@ -1,12 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { weatherRequest } from "../utils/requests";
-import { WeatherAPIError, CityWeatherResponse } from "../types";
-
-type Coord = {
-  lat: string | null;
-  lon: string | null;
-};
+import { WeatherAPIError, CityWeatherResponse, Coord } from "../types";
 
 export const queryKeys = {
   cityWeather: (cityCord: Coord, unit: string) => [
