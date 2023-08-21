@@ -9,8 +9,6 @@ function fallbackRender({
   error: { message: string };
   resetErrorBoundary: () => void;
 }) {
-  // Call resetErrorBoundary() to reset the error boundary and retry the render.
-
   return (
     <div className="border border-highlightBlue rounded-md p-4 mt-8">
       <p>It looks like something has gone wrong:</p>
