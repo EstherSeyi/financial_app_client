@@ -159,16 +159,20 @@ export default function CityDetails() {
             </p>
           </div>
           <div className="self-start">
-            {data.weather?.map((item) => (
-              <div key={item.id}>
-                <img
-                  src={`https://openweathermap.org/img/wn/${item?.icon}.png`}
-                  alt={item.description}
-                  width={100}
-                  height={100}
-                />
-              </div>
-            ))}
+            {isLoading ? (
+              <div className="animate-pulse rounded-full bg-slate-200 h-[100px] w-[100px]"></div>
+            ) : (
+              data?.weather?.map((item) => (
+                <div key={item.id}>
+                  <img
+                    src={`https://openweathermap.org/img/wn/${item?.icon}.png`}
+                    alt={item.description}
+                    width={100}
+                    height={100}
+                  />
+                </div>
+              ))
+            )}
           </div>
         </div>
 

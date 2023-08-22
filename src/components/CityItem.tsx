@@ -24,7 +24,7 @@ const CityItem = ({
   );
 
   const { unit } = useUnit();
-  const { data } = useGetCityWeather(
+  const { data, isLoading } = useGetCityWeather(
     {
       lat: city?.fields?.latitude,
       lon: city?.fields?.longitude,
@@ -36,17 +36,21 @@ const CityItem = ({
   return (
     <div className="block mb-4 border-2 border-highlightBlue hover:bg-transparent focus:bg-transparent transition-all py-4 px-6 rounded-2xl bg-midBlue">
       <div className="flex flex-wrap">
-        {data?.weather?.length && (
-          <div className="mr-6">
-            <img
-              data-testid="weather-icon"
-              src={`https://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`}
-              alt={data?.weather[0]?.description}
-              className="rounded-full"
-              width={100}
-              height={100}
-            />
-          </div>
+        {isLoading ? (
+          <div className="animate-pulse rounded-full bg-slate-400 h-[100px] w-[100px] mr-6"></div>
+        ) : (
+          data?.weather?.length && (
+            <div className="mr-6">
+              <img
+                data-testid="weather-icon"
+                src={`https://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`}
+                alt={data?.weather[0]?.description}
+                className="rounded-full"
+                width={100}
+                height={100}
+              />
+            </div>
+          )
         )}
         <div className="flex justify-between flex-1">
           <div className="flex flex-col justify-between">
@@ -86,7 +90,7 @@ const CityItem = ({
               />
             </button>
             <p className="text-textBright text-3xl font-light">
-              {data?.main?.temp}°
+              {isLoading ? "..." : data?.main?.temp}°
             </p>
           </div>
         </div>
