@@ -57,8 +57,6 @@ export const useSearchCityByName = (cityName: string) => {
   ) as UseQueryResult<City[], AxiosError>;
 };
 
-// https://public.opendatasoft.com/api/records/1.0/search/?dataset=geonames-all-cities-with-a-population-500&q=lagos&lang=d210ab247bc1dca4dfdfd54196ed4d2a63f73bb9&rows=1&sort=population&facet=longitude&facet=latitude&refine.latitude=41.45102&refine.longitude=26.46067
-
 export const useGetSingleCity = (cityQuery: string, code?: string | null) => {
   return useQuery(
     queryKeys.searchSingleCity(cityQuery),
