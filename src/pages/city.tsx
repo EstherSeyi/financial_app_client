@@ -133,11 +133,17 @@ export default function CityDetails() {
   ) : isError ? (
     "Errored"
   ) : (
-    <section className="flex mt-8 flex-col md:flex-row">
+    <section
+      data-cy={`city_${params?.cityId}`}
+      className="flex mt-8 flex-col md:flex-row"
+    >
       <div className="flex-1 md:mr-8 md:self-start">
         <div className="flex justify-between mb-6">
           <div>
-            <h1 className="flex items-center gap-2 text-4xl text-textBright mb-0 font-medium">
+            <h1
+              data-cy="city_name"
+              className="flex items-center gap-2 text-4xl text-textBright mb-0 font-medium"
+            >
               {data?.name}
 
               <button onClick={handleFavorite}>
@@ -189,7 +195,10 @@ export default function CityDetails() {
             </p>
           )}
 
-          <div className="grid justify-center  sm:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div
+            data-cy="weather-dets-section"
+            className="grid justify-center  sm:grid-cols-2 lg:grid-cols-3 gap-12"
+          >
             <DetailBox
               value={data?.main?.feels_like}
               unit="°"
@@ -235,8 +244,9 @@ export default function CityDetails() {
       </div>
 
       <div className="basis-5/12 lg:basis-4/12 bg-midBlue p-4 rounded-xl md:self-start">
-        <form onSubmit={handleSaveNotes}>
+        <form data-cy="notes-form" onSubmit={handleSaveNotes}>
           <textarea
+            data-cy="note-input"
             value={note.text}
             className="w-full bg-transparent border border-highlightBlue rounded-lg p-2 text-[#c4cad3ff] font-light focus:outline-none focus:border-2"
             rows={5}
@@ -249,6 +259,7 @@ export default function CityDetails() {
             }}
           />
           <button
+            data-cy="note-submit-btn"
             type="submit"
             disabled={!note.text}
             className="block ml-auto bg-highlightBlue px-2 rounded py-1 text-white text-sm hover:scale-105 focus:scale-105 transition-all disabled:cursor-not-allowed disabled:scale-100 disabled:bg-gray-300"
@@ -257,12 +268,13 @@ export default function CityDetails() {
           </button>
         </form>
 
-        <ul className="mt-6 ">
+        <div data-cy="notes-list" className="mt-6">
           <div className="flex justify-between items-center">
             <h2 className="font-semibold text-sm mb-4">NOTES</h2>
 
             {notesToDelete?.length ? (
               <button
+                data-cy="del-btn"
                 className="text-sm self-start flex"
                 onClick={handleDeleteNote}
               >
@@ -272,13 +284,14 @@ export default function CityDetails() {
             ) : null}
           </div>
           {notes && notes.length ? (
-            <>
+            <ul>
               {notes?.map((item) => (
                 <li
                   key={item.createdAt}
                   className="border-b border-[#31445b] mb-4 flex"
                 >
                   <input
+                    data-cy="del-checkbox"
                     type="checkbox"
                     className="mr-3"
                     onChange={(e) => handleSelect(e, item)}
@@ -293,21 +306,22 @@ export default function CityDetails() {
                     </span>
                     <p className="text-sm text-[#c4cad3ff]">{item.text}</p>
                     <button
+                      data-cy="edit-btn"
                       className="block ml-auto"
                       onClick={() => handleEditNote(item)}
                     >
-                      <PenSquareIcon className="w-4 h-4" />
+                      <PenSquareIcon data-cy="edit-icon" className="w-4 h-4" />
                     </button>
                   </div>
                 </li>
               ))}
-            </>
+            </ul>
           ) : (
-            <div>
+            <div data-cy="no-notes">
               <span>No Notes Yet</span>
             </div>
           )}
-        </ul>
+        </div>
       </div>
     </section>
   );

@@ -34,7 +34,10 @@ const CityItem = ({
   );
 
   return (
-    <div className="block mb-4 border-2 border-highlightBlue hover:bg-transparent focus:bg-transparent transition-all py-4 px-6 rounded-2xl bg-midBlue">
+    <div
+      data-cy={`city-${city?.fields?.name}`}
+      className="block mb-4 border-2 border-highlightBlue hover:bg-transparent focus:bg-transparent transition-all py-4 px-6 rounded-2xl bg-midBlue"
+    >
       <div className="flex flex-wrap">
         {isLoading ? (
           <div className="animate-pulse rounded-full bg-slate-400 h-[100px] w-[100px] mr-6"></div>
@@ -42,6 +45,7 @@ const CityItem = ({
           data?.weather?.length && (
             <div className="mr-6">
               <img
+                data-cy="weather-icon"
                 data-testid="weather-icon"
                 src={`https://openweathermap.org/img/wn/${data?.weather[0]?.icon}.png`}
                 alt={data?.weather[0]?.description}
@@ -70,10 +74,15 @@ const CityItem = ({
               </p>
             </div>
             <button
+              data-cy="delete-btn"
               className="text-sm self-start"
               onClick={() => handleDeleteCity(city)}
             >
-              <TrashIcon data-testid="trash-icon" className="w-5 h-5" />
+              <TrashIcon
+                data-cy="trash-icon"
+                data-testid="trash-icon"
+                className="w-5 h-5"
+              />
             </button>
           </div>
           <div className="flex flex-col justify-between">
@@ -83,6 +92,7 @@ const CityItem = ({
               onClick={() => handleFavorite(city)}
             >
               <StarIcon
+                data-cy="fave-icon"
                 data-testid="star-icon"
                 className={`w-8 h-8 ${
                   isFav ? "text-yellow-300 fill-yellow-300" : ""

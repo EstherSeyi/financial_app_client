@@ -85,7 +85,6 @@ export default function Home() {
                 <div data-cy="cities-list">
                   {cities?.map((city: City) => (
                     <CityItem
-                      data-cy={`city-${city?.fields?.name}`}
                       key={city.fields.geoname_id}
                       city={city}
                       handleFavorite={handleFavorite}

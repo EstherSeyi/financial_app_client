@@ -20,11 +20,12 @@ const SearchCity = () => {
   };
 
   return (
-    <div className="w-72">
+    <div className="w-72" data-cy="search-city">
       <Combobox value={selected} onChange={handleSelect}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-highlightBlue sm:text-sm">
             <Combobox.Input
+              data-cy="search-input"
               placeholder="Search By City Name..."
               className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-highlightBlue"
               displayValue={(city: City) => city?.fields?.name}
@@ -38,7 +39,10 @@ const SearchCity = () => {
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-midBlue py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border border-highlightBlue z-[1]">
+            <Combobox.Options
+              data-cy="city-list"
+              className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-midBlue py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm border border-highlightBlue z-[1]"
+            >
               {isLoading ? (
                 <div data-testid="loader">Loading...</div>
               ) : isError ? (
@@ -50,6 +54,7 @@ const SearchCity = () => {
               ) : (
                 data.map((city) => (
                   <Combobox.Option
+                    data-cy="city-item"
                     key={city.fields.geoname_id}
                     className={({ active }) =>
                       `relative cursor-default select-none py-4 pl-10 pr-4 ${
