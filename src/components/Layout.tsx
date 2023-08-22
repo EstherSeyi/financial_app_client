@@ -1,4 +1,5 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import SearchCity from "./SearchCity";
 import UnitToggle from "./UnitToggle";
 import UnitProvider from "../context/unit";
@@ -21,6 +22,7 @@ const Layout = () => {
           <UnitToggle />
           <SearchCity />
           <ErrorBoundary>
+            <Toaster />
             <Outlet />
           </ErrorBoundary>
         </UnitProvider>

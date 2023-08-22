@@ -1,6 +1,7 @@
 import { Dispatch, Fragment, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
+import toast from "react-hot-toast";
 
 import { useGetGeolocation } from "../hooks/geolocation";
 import { storeGeoLocationPermission } from "../helpers/location";
@@ -31,6 +32,11 @@ export default function UserLocationModal({
         storeGeoLocationPermission("granted");
         navigate(
           `/${response.city}?lat=${lat}&lon=${lon}&country_code=${response.country}`
+        );
+      },
+      onError() {
+        toast.error(
+          "Failed! Ensure location is enabled and linient privacy protection"
         );
       },
     });
