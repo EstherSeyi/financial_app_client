@@ -1,27 +1,42 @@
-# React + TypeScript + Vite
+# Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This App allows you view weather details of cities around the world.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- View list of 15 most populated cities listed in alphabetical order
+- Add/Remove a city to a list of favorite cites
+- Delete a city from both lists (favorite, others)
+- View single city page with weather details of that city
+- Add/Edit/Delete notes for each city
+- Search for a city and view details of a city.
+- Display weather details of user's current location.
+- Show weather details in metric and imperial units.
 
-## Expanding the ESLint configuration
+## How to run app
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- cd to project in your terminal and run `yarn`.
+- add env variables in the .env.example file
+- run `yarn dev`
 
-- Configure the top-level `parserOptions` property like this:
+## How to run tests
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+### Unit Tests
+
+- run `yarn test`
+
+### For E2E
+
+- Ensure you have chrome or firefox browsers
+- run `yarn run cypress:test`
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Screenshots
+
+- Home Page
+  ![weather app home page](https://res.cloudinary.com/estherseyi/image/upload/v1692879881/xzeevfgvr8spqxxjhstn.png)
+
+- Single City Page
+  ![weather app city page](https://res.cloudinary.com/estherseyi/image/upload/v1692879890/tmewbinydp4jd4boyaui.png)
+```
